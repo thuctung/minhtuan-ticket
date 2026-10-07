@@ -1,0 +1,69 @@
+import { PHONE_ADMIN } from "@/commons/constant";
+
+export default function Footer() {
+  return (
+    <footer className="bg-[#272625] text-neutral-400 py-16 text-sm">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Minh Tuấn Travel</h4>
+            <p className="text-neutral-400 leading-relaxed">
+              Mua vé du lịch nhanh chóng và tiện lợi.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Liên Kết</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  Dịch vụ
+                </a>
+              </li>
+              <li>
+                <a href="#sites" className="hover:text-white transition-colors">
+                  Khu du lịch
+                </a>
+              </li>
+              <li>
+                <a href="#agent" className="hover:text-white transition-colors">
+                  Đại lý
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Chính Sách</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Điều khoản sử dụng
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Chính sách bảo mật
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Quy trình hoàn tiền
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Liên Hệ</h4>
+            <p className="leading-relaxed">
+              Hotline: <span className="text-white">{PHONE_ADMIN}</span>
+              <br />
+              Email: <span className="text-white">{process.env.NEXT_PUBLIC_EMAIL_COMPANY}</span>
+            </p>
+          </div>
+        </div>
+        <div className="text-center pt-8 border-t border-neutral-900 text-xs text-neutral-600">
+          <p>&copy; 2026 Minh Tuấn. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
