@@ -19,7 +19,7 @@ export function HeaderMobile({ pathname }: { pathname: string }) {
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <div className="flex items-center">
             <Image
-              src="/logo1.jpg"
+              src="/logo1.png"
               alt="Minh Tuan Travel"
               width={48}
               height={48}

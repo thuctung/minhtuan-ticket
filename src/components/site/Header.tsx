@@ -42,7 +42,6 @@ import { HeaderMobile } from "./HeaderMobile";
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
-  const lang = useLang();
 
   const profile: ProfileType = useProfileStore((state: any) => state.profile);
   const supabase = createSupabaseBrowserClient();
@@ -96,7 +95,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative transition-transform group-hover:scale-105">
               <Image
-                src="/logo1.jpg"
+                src="/logo1.png"
                 alt="Minh Tuan Travel"
                 width={48}
                 height={48}

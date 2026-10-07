@@ -10,14 +10,6 @@ import { Suspense } from "react";
 
 import { body, mono } from "@/helpers/font-client";
 
-export const metadata: Metadata = {
-  title: "Minh Tuấn",
-  description: "Vé du lịch Đà Nẵng",
-  icons: {
-    icon: "/icon.png",
-  },
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
