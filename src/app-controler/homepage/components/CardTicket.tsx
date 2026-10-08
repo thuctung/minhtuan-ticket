@@ -1,26 +1,20 @@
+import HoverImage from "@/components/ui/hover-image";
 import Image from "next/image";
 import Link from "next/link";
 
 export type TicketCardProps = {
-  image: string;
+  image1: string;
+  image2: string;
   title: string;
   address: string;
-  /** Giá vé (VND). Truyền 0 để hiển thị "Miễn phí". */
-  price: number;
-  /** Đường dẫn tới trang mua vé / thanh toán */
+  price: string;
   href: string;
   className?: string;
 };
 
-const formatVND = (value: number) =>
-  new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-    maximumFractionDigits: 0,
-  }).format(value);
-
 export default function TicketCard({
-  image,
+  image1,
+  image2,
   title,
   address,
   price,
@@ -33,12 +27,11 @@ export default function TicketCard({
     >
       {/* Ảnh */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
-        <Image
-          src={image}
+        <HoverImage
           alt={title}
-          fill
-          sizes="(max-width: 640px) 100vw, 384px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          image={image1}
+          hoverImage={image2}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
       </div>
 
@@ -68,15 +61,13 @@ export default function TicketCard({
 
         <div className="mt-auto flex items-center justify-between gap-4">
           <div>
-            <p className="text-xs text-slate-500">Giá vé</p>
-            <p className="text-xl font-bold text-rose-600">
-              {price > 0 ? formatVND(price) : "Miễn phí"}
-            </p>
+            <p className="text-xs text-slate-500">Giá vé từ</p>
+            <p className="text-xl font-bold text-rose-600">{price}</p>
           </div>
 
           <Link
             href={href}
-            className="rounded-full bg-rose-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-rose-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-600 focus-visible:ring-offset-2"
+            className="rounded-full bg-[#2a7e1c] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#2a7e5c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2a7e1c] focus-visible:ring-offset-2"
           >
             Mua ngay
           </Link>

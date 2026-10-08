@@ -8,50 +8,56 @@ import TicketCard from "./CardTicket";
 const listExperiences = [
   {
     id: 12,
-    image: "/images/experience1.jpg",
+    image1: "/products/bana1.jpg",
+    image2: "/products/bana2.jpg",
     title: "Bà Nà Hills",
     address: "Đà Nẵng",
-    price: 90000,
+    price: 600000,
     href: "/ticket?id=1",
   },
   {
     id: 3,
-    image: "/images/experience1.jpg",
-    title: "Bà Nà Hills",
-    address: "Đà Nẵng",
-    price: 90000,
+    image1: "/products/baden1.jpg",
+    image2: "/products/baden2.jpg",
+    title: "Sun World Ba Den Mountain",
+    address: "Tây Ninh",
+    price: 400000,
     href: "/ticket?id=1",
   },
   {
     id: 4,
-    image: "/images/experience1.jpg",
-    title: "Bà Nà Hills",
-    address: "Đà Nẵng",
-    price: 90000,
+    image1: "/products/hanam1.jpg",
+    image2: "/products/hanam2.jpg",
+    title: "Sun World Hà Nam",
+    address: "Hà Nam",
+    price: 100000,
     href: "/ticket?id=1",
   },
   {
     id: 5,
-    image: "/images/experience1.jpg",
-    title: "Bà Nà Hills",
-    address: "Đà Nẵng",
-    price: 90000,
+    image1: "/products/halong1.jpg",
+    image2: "/products/halong2.jpg",
+    title: "Sun World Hạ Long",
+    address: "Quảng Ninh",
+    price: 200000,
     href: "/ticket?id=1",
   },
   {
     id: 6,
-    image: "/images/experience1.jpg",
-    title: "Bà Nà Hills",
-    address: "Đà Nẵng",
-    price: 90000,
+    image1: "/products/honthom1.jpg",
+    image2: "/products/honthom2.jpg",
+    title: "Sun World Hòn Thơm",
+    address: "Phú Quốc",
+    price: 400000,
     href: "/ticket?id=1",
   },
   {
     id: 7,
-    image: "/images/experience1.jpg",
-    title: "Bà Nà Hills",
-    address: "Đà Nẵng",
-    price: 90000,
+    image1: "/products/fansipan1.jpeg",
+    image2: "/products/fansipan2.jpg",
+    title: "Sun World Fansipan",
+    address: "Lào Cai",
+    price: 500000,
     href: "/ticket?id=1",
   },
 ];
@@ -72,7 +78,7 @@ export function ExperiencesSection() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-slate-900">
-              Địa đểm nổi bật
+              Top trải nghiệm nổi bật
             </h2>
             <div className="mt-2 mx-auto w-12 h-1 rounded-full bg-gradient-to-r from-sky-400 to-violet-500" />
           </div>
@@ -80,10 +86,11 @@ export function ExperiencesSection() {
             {listExperiences.map((item) => (
               <TicketCard
                 key={item.id}
-                image={item.image}
+                image1={item.image1}
+                image2={item.image2}
                 title={item.title}
                 address={item.address}
-                price={item.price}
+                price={displayPrice(item.price)}
                 href={item.href}
                 className=""
               />

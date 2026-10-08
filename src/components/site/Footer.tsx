@@ -3,8 +3,8 @@ import { PHONE_ADMIN } from "@/commons/constant";
 export default function Footer() {
   return (
     <footer className="bg-[#272625] text-neutral-400 py-16 text-sm">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+      <div className="container mx-auto  max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <h4 className="text-white text-base font-bold mb-4 tracking-wider">Minh Tuấn Travel</h4>
             <p className="text-neutral-400 leading-relaxed">
@@ -52,16 +52,13 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Liên Hệ</h4>
-            <p className="leading-relaxed">
+            <h4 className="text-white text-base font-bold tracking-wider mb-4">Liên Hệ</h4>
+            <p className="leading-relaxed ">
               Hotline: <span className="text-white">{PHONE_ADMIN}</span>
               <br />
               Email: <span className="text-white">{process.env.NEXT_PUBLIC_EMAIL_COMPANY}</span>
             </p>
           </div>
-        </div>
-        <div className="text-center pt-8 border-t border-neutral-900 text-xs text-neutral-600">
-          <p>&copy; 2026 Minh Tuấn. All rights reserved.</p>
         </div>
       </div>
     </footer>

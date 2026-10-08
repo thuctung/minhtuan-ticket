@@ -25,7 +25,7 @@ const defaultSteps: Step[] = [
   { title: "Đăng ký tài khoản" },
   { title: "Gửi yêu cầu cộng tác viên" },
   { title: "Admin duyệt" },
-  { title: "Nạp ví trước để xuất vé nhanh cho khách", note: "Nếu là agent" },
+  { title: "Nạp tiền vào ví và xuất vé", note: "Nếu là agent" },
 ];
 
 const defaultPanels: [Panel, Panel] = [
@@ -58,22 +58,15 @@ export default function AffiliateIntro({
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         {/* Tiêu đề + nút */}
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <h2 className="font-[family-name:var(--font-display)] text-5xl font-extrabold leading-none tracking-tight md:text-7xl">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-extrabold leading-none tracking-tight md:text-5xl">
             {title}
           </h2>
-
           <div className="flex flex-wrap gap-3">
             <Link
               href={primaryCta.href}
               className="rounded-lg bg-[#F2B134] px-6 py-3.5 text-sm font-semibold text-[#0F2E2A] transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F2E2A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EDF1EE]"
             >
               {primaryCta.label}
-            </Link>
-            <Link
-              href={secondaryCta.href}
-              className="rounded-lg border-2 border-[#0F2E2A] px-6 py-3.5 text-sm font-semibold transition hover:bg-[#0F2E2A] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F2E2A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EDF1EE]"
-            >
-              {secondaryCta.label}
             </Link>
           </div>
         </div>
@@ -100,7 +93,6 @@ export default function AffiliateIntro({
                 </span>
 
                 <p className="max-w-[16rem] text-base font-semibold leading-snug">{step.title}</p>
-                {step.note && <p className="mt-2 text-sm text-[#4B635E]">{step.note}</p>}
               </li>
             );
           })}
