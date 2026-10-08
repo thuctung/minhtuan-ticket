@@ -53,11 +53,24 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-white text-base font-bold tracking-wider mb-4">Liên Hệ</h4>
-            <p className="leading-relaxed ">
-              Hotline: <span className="text-white">{PHONE_ADMIN}</span>
-              <br />
-              Email: <span className="text-white">{process.env.NEXT_PUBLIC_EMAIL_COMPANY}</span>
-            </p>
+            <ul className="space-y-2.5">
+              <li>
+                <p>
+                  Hotline: <span className="text-white">{PHONE_ADMIN}</span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Email: <span className="text-white">{process.env.NEXT_PUBLIC_EMAIL_COMPANY}</span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Địa chỉ:
+                  <span className="text-white">50 Hoàng Thúc Trâm,Phường Hoà Cường,TP.Đà Nẵng</span>
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

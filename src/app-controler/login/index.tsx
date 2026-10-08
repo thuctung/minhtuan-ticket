@@ -135,7 +135,7 @@ export default function Login() {
       <p className="mt-5 text-xs text-neutral-600">
         Chưa có tài khoản?{" "}
         <Link
-          href="/dang-ky-dai-ly"
+          href="/dai-ly"
           className="font-semibold  underline-offset-2 text-[#61a05e] hover:underline "
         >
           Đăng kí đại lý

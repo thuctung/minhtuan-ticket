@@ -73,7 +73,7 @@ export default function AddMoneyDialog({
         className="w-full max-w-sm overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5"
       >
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-[#C81418] to-[#8C0E11] px-6 py-4">
+        <div className="relative bg-gradient-to-r from-[#178c0e] to-[#178c0e] px-6 py-4">
           <button
             onClick={onClose}
             disabled={loading}
@@ -114,7 +114,7 @@ export default function AddMoneyDialog({
             <button
               type="submit"
               disabled={loading}
-              className="rounded-lg bg-gradient-to-r from-[#C81418] to-[#8C0E11] px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70"
+              className="rounded-lg bg-gradient-to-r from-[#178c0e] to-[#178c0e] px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? "Đang lưu..." : "Submit"}
             </button>

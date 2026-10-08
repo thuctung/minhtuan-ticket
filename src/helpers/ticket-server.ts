@@ -41,14 +41,14 @@ export const downloadTicketPDFServer = async (
   pdf.addFont("Roboto-Bold.ttf", "Roboto", "bold");
 
   // Load logos
-  const minhTuanlogo = getImage("/logo.png");
+  const minhTuanlogo = getImage("/logo1.png");
 
   const logo = LogoBySite[finalList[0].siteCode as keyof typeof LogoBySite] ?? LogoBySite.HLS;
 
   const sunWorldLogo = getImage(logo);
 
   // Colors dùng xuyên suốt (theo đúng mẫu thiết kế)
-  const RED_BRIGHT = [200, 20, 24] as const; // dải tiêu đề / nút "Mã vé" / footer
+  const GREEM_BRIGHT = [97, 160, 94] as const; // dải tiêu đề / nút "Mã vé" / footer
   const RED_DARK = [120, 14, 14] as const; // badge "MÃ ĐƠN"
   const RED_LABEL = [180, 20, 24] as const; // chữ label màu đỏ
   const TEXT_DARK = [40, 30, 30] as const;
@@ -87,7 +87,7 @@ export const downloadTicketPDFServer = async (
     const titleBarPadding = 8;
     const titleBarH = titleLines.length * lineHeight + titleBarPadding * 2 - 4;
 
-    // pdf.setFillColor(...RED_BRIGHT);
+    // pdf.setFillColor(...GREEM_BRIGHT);
     // pdf.rect(8, y, PAGE_W - 16, titleBarH, "F");
     pdf.setTextColor(0, 0, 0);
     titleLines.forEach((line: string, idx: number) => {
@@ -123,11 +123,11 @@ export const downloadTicketPDFServer = async (
       y += 12;
       pdf.setTextColor(...RED_LABEL);
       pdf.setFont("Roboto", "normal");
-      pdf.text("Khu vực/Restaurant:", leftX, y);
+      pdf.text("Nhà hàng/Restaurant:", leftX, y);
 
       pdf.setTextColor(...TEXT_DARK);
       pdf.setFont("Roboto", "bold");
-      pdf.text(t.restaurantName, leftX + 71, y, { align: "left" });
+      pdf.text(t.restaurantName, leftX + 75, y, { align: "left" });
       // y += 12;
       // pdf.setTextColor(...RED_LABEL);
       // pdf.text("Giờ/Time:", leftX, y);
@@ -191,7 +191,7 @@ export const downloadTicketPDFServer = async (
 
     // ===== QR BOX =====
     const qrBoxH = 96;
-    pdf.setDrawColor(...RED_BRIGHT);
+    pdf.setDrawColor(...GREEM_BRIGHT);
     pdf.setLineWidth(1.2);
     pdf.roundedRect(18, y, PAGE_W - 36, qrBoxH, 8, 8);
 
@@ -213,7 +213,7 @@ export const downloadTicketPDFServer = async (
       pdf.text(`${indexTicket}/${tickets.length}`, 104, y + 34);
     }
 
-    pdf.setFillColor(...RED_BRIGHT);
+    pdf.setFillColor(...GREEM_BRIGHT);
     pdf.roundedRect(104, y + 46, PAGE_W - 36 - 96, 28, 5, 5, "F");
     pdf.setTextColor(255, 255, 255);
     pdf.setFont("Roboto", "normal");
@@ -282,13 +282,13 @@ export const downloadTicketPDFServer = async (
 
     // ===== FOOTER =====
     const r = 2;
-    pdf.setFillColor(...RED_BRIGHT);
+    pdf.setFillColor(...GREEM_BRIGHT);
     // pdf.roundedRect(8, PAGE_H - 34, PAGE_W - 16, 26, r, r, "F");
     pdf.rect(8, PAGE_H - 44, PAGE_W - 16, r, "F");
     pdf.setTextColor(0, 0, 0);
     pdf.setFont("Roboto", "normal");
     pdf.setFontSize(12);
-    pdf.text("Minh Tuấn", PAGE_W / 2 - 28, PAGE_H - 22, { align: "center" });
+    pdf.text("Minh Tuấn Travel", PAGE_W / 2 - 28, PAGE_H - 22, { align: "center" });
 
     pdf.setFont("Roboto", "normal");
     pdf.setFontSize(9);

@@ -114,7 +114,7 @@ export default function AffProfilePageController() {
           </div>
         </div>
 
-        <div className="md:col-span-2 space-y-6">
+        <div className="md:col-span-2 space-y-6 bg-white p-6 shadow-sm border border-gray-100  rounded-2xl">
           <div className="flex items-center gap-2 mb-2 text-blue-600 font-semibold">
             <User size={20} />
             <h3>Thông tin cá nhân</h3>

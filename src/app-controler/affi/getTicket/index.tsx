@@ -160,23 +160,23 @@ export default function GetTicketPageControler() {
       };
 
       const order_id = await createOrderTicket(params);
-
-      if (in_system) {
-        if (siteCode === SITE_CODES.NUITHANTAI) {
-          handleBuyTicketInSystem(
-            order_id,
-            products,
-            thirdPartyNumber,
-            date_use,
-            totalMoney,
-            callback
-          );
-        } else {
-          setToastMessage("Chưa mở bán ở địa điểm này!");
-        }
-      } else {
-        handleByTicketSunWorld(order_id, thirdPartyNumber, values);
-      }
+      handleByTicketSunWorld(order_id, thirdPartyNumber, values);
+      // if (in_system) {
+      //   if (siteCode === SITE_CODES.NUITHANTAI) {
+      //     handleBuyTicketInSystem(
+      //       order_id,
+      //       products,
+      //       thirdPartyNumber,
+      //       date_use,
+      //       totalMoney,
+      //       callback
+      //     );
+      //   } else {
+      //     setToastMessage("Chưa mở bán ở địa điểm này!");
+      //   }
+      // } else {
+      //   handleByTicketSunWorld(order_id, thirdPartyNumber, values);
+      // }
     }
   };
 

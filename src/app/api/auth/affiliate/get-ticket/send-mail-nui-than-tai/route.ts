@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       toMail.push(email);
     }
     await resendMail.emails.send({
-      from: "Minh Tuấn Travel System<noreply@tuanmanhtravel.com>",
+      from: "Minh Tuấn Travel System<noreply@htmtravel.com>",
       to: toMail,
       subject: `Đặt vé Núi Thần Tài ${orderCode}, Ngày ${dateUse}`,
       html: `

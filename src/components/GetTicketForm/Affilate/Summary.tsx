@@ -121,7 +121,7 @@ export default function OrderAffSummary({
                       </button>
                     </div>
                     <div className="flex">
-                      <span className="font-semibold text-red-600">
+                      <span className="font-semibold text-[#2d8020]">
                         {formatVND(
                           getPriceAgentAndMultiple(t, formType, agentPrice) *
                             (quantities[t.code] ?? 0)
@@ -153,7 +153,7 @@ export default function OrderAffSummary({
         <button
           disabled={totalTickets === 0 || loading}
           onClick={onBuyTicket}
-          className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+          className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#2d8020] py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#205118] disabled:cursor-not-allowed disabled:bg-gray-300"
         >
           {loading ? "Đang tạo..." : "Xuất vé"}
         </button>

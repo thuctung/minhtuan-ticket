@@ -15,7 +15,6 @@ type SearchTicketFormProps = {
   onChangeForm: (key: string, value: string) => void;
   onSearch: () => void;
   searchValue: SearchTicketSale;
-  handleExcel: () => void;
   listAff: ListAffDropdownType[];
   listSite: SiteType[];
 };
@@ -24,7 +23,6 @@ export function SearchReport({
   searchValue,
   listAff,
   listSite,
-  handleExcel,
   onChangeForm,
   onSearch,
 }: SearchTicketFormProps) {
@@ -136,12 +134,6 @@ export function SearchReport({
         <div className=" flex flex-wrap justify-end  pr-3">
           <div className="flex justify-end gap-3 mt-6">
             <SearchButton onClick={onSearch} />
-            <button
-              onClick={handleExcel}
-              className="px-6 py-2.5 rounded-xl border border-gray-200 font-semibold text-gray-600 hover:bg-white transition-all"
-            >
-              Export Excel
-            </button>
           </div>
         </div>
       </div>

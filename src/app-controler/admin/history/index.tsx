@@ -167,7 +167,6 @@ export default function AdminHistoryPageControler() {
       <SearchReport
         onChangeForm={handleChangeForm}
         searchValue={params.searchValue}
-        handleExcel={handleExportExcel}
         onSearch={fetchTicketSale}
         listAff={listAff}
         listSite={listSite}

@@ -2,7 +2,7 @@ import { KEY_MODIFY_DATA } from "@/app-controler/affi/stats/contants";
 import { DB_TABLE_NAME } from "@/commons/constant";
 import { supabaseAdmin } from "@/lib/supabase/server";
 
-export const updateOrderError = async (orderId: string, errorMessage: string, orderCode = null) => {
+export const updateOrderError = async (orderId: string, errorMessage: string, orderCode = "") => {
   return await supabaseAdmin
     .from(DB_TABLE_NAME.ORDERS)
     .update({

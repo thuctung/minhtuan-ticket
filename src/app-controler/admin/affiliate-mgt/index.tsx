@@ -143,15 +143,15 @@ export default function AffiliateMgt() {
       key: "phone",
       title: "Phone",
     },
-    {
-      key: "agent_level",
-      title: "Đại lý",
-      render: (row) => (
-        <span>
-          {agentList.find((item) => item.code === row.agent_level)?.name || row.agent_level}
-        </span>
-      ),
-    },
+    // {
+    //   key: "agent_level",
+    //   title: "Đại lý",
+    //   render: (row) => (
+    //     <span>
+    //       {agentList.find((item) => item.code === row.agent_level)?.name || row.agent_level}
+    //     </span>
+    //   ),
+    // },
     {
       key: "status",
       title: "Trạng thái",
@@ -199,22 +199,22 @@ export default function AffiliateMgt() {
         </div>
       ),
     },
-    {
-      key: "actionss",
-      title: "",
-      render: (row) => (
-        <Button onClick={() => openEditLevel(row)} size="sm" variant="default">
-          Sửa level
-        </Button>
-      ),
-    },
+    // {
+    //   key: "actionss",
+    //   title: "",
+    //   render: (row) => (
+    //     <Button onClick={() => openEditLevel(row)} size="sm" variant="default">
+    //       Sửa level
+    //     </Button>
+    //   ),
+    // },
     {
       key: "action",
       title: "",
       align: "center",
       render: (row) =>
-        row.agent_level === AGENT_CODE.STAFF ? (
-          <Button size="sm" variant="destructive" onClick={() => openAddMoney(row)}>
+        row.agent_level === AGENT_CODE.LEVEL_1 ? (
+          <Button size="sm" onClick={() => openAddMoney(row)}>
             Nạp tiền
           </Button>
         ) : null,

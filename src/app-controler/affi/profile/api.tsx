@@ -7,7 +7,6 @@ import { CommonType } from "@/types";
 import { get } from "lodash";
 
 const { setToastMessage, setGlobalLoading }: CommonType | any = useCommonStore.getState();
-const clientSupbase = createSupabaseBrowserClient();
 
 export const updateProfile = async (params: {
   phone: string;

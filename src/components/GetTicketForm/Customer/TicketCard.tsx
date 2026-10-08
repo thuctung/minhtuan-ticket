@@ -68,7 +68,7 @@ const TicketCard = React.memo(({ ticket, setQty, quantities, formType, agentPric
           </div>
 
           <div className="shrink-0 text-right flex flex-col-reverse items-start md:flex-col md:items-end">
-            <div className="text-lg font-bold text-red-600 sm:text-xl">
+            <div className="text-lg font-bold text-[#2d8020] sm:text-xl">
               {formatVND(getPriceAgentAndMultiple(ticket, formType, agentPrice))}
             </div>
             <div className="mt-0.5 text-xs font-medium text-[#862a42] line-through">
@@ -82,49 +82,9 @@ const TicketCard = React.memo(({ ticket, setQty, quantities, formType, agentPric
             ) : null}
           </div>
         </div>
-        {ticket.description ? (
-          <button
-            type="button"
-            onClick={() => toggleExpand(ticket.code)}
-            className="mt-1 flex items-center gap-1 text-xs font-medium text-[#6E7C73] transition-colors hover:text-[#C81418]"
-          >
-            Xem chi tiết
-            <ChevronDown
-              className={`h-3 w-3 transition-transform ${
-                expandedItems.has(ticket.code) ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-        ) : null}
-        {expandedItems.has(ticket.code) && ticket.description ? (
-          <div className="mt-2 space-y-1 text-xs leading-relaxed text-[#432020f0]">
-            {ticket.description
-              .split("/n")
-              .filter(Boolean)
-              .map((line, idx) => (
-                <p className="text-[#432020f0]" key={idx}>
-                  - {line.replace(/\/n/g, "")}
-                </p>
-              ))}
-          </div>
-        ) : null}
-        {/* Bottom */}
-        <div className="mt-5 flex items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            {featues(ticket?.site?.code || ticket?.site_code).map((feature) => {
-              const Icon = FEATURE_ICON_BANA[feature] ?? Compass;
-              return (
-                <span
-                  key={feature}
-                  className="flex items-center gap-1.5 text-xs font-medium text-gray-600"
-                >
-                  <Icon size={14} strokeWidth={2} className="text-emerald-500" />
-                  {feature}
-                </span>
-              );
-            })}
-          </div>
 
+        {/* Bottom */}
+        <div className="mt-5 flex items-center justify-end gap-4">
           {/* Quantity */}
           <div className="flex shrink-0 items-center gap-2 rounded-full border border-white/80 bg-white/80 px-1.5 py-1.5 shadow-sm backdrop-blur-md">
             <button

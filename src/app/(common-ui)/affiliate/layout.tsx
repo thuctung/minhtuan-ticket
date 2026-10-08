@@ -18,7 +18,8 @@ export default function AffiliateLayout({ children }: { children: React.ReactNod
         onCloseMobile={() => setMobileOpen(false)}
         menuList={SIDEBAR_AFF}
       />
-      <main className="min-w-0 flex-1 px-4 py-5 pb-16 md:px-7 md:py-6">
+      {/* <main className="> */}
+      <main className=" min-w-0 flex-1 px-4 py-5 pb-16 md:px-7 md:py-6 bg-[#fafafa]  text-neutral-900 antialiased [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px]">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <button

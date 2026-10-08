@@ -21,13 +21,12 @@ export default function ToastMessage() {
   const handleCloseToast = () => {
     setToastMessage(null);
   };
-
   return (
     <Dialog open={!isEmpty(messageToast)} onOpenChange={handleCloseToast}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Thông báo</DialogTitle>
-          <DialogDescription>{"Có lỗi xảy ra"}</DialogDescription>
+          <DialogDescription>{messageToast}</DialogDescription>
         </DialogHeader>
 
         <DialogFooter>

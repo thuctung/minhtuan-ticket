@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 // @ts-ignore: CSS module declarations not found in this environment
 import "./globals.css";
@@ -8,7 +7,6 @@ import { LoadingGlobal } from "@/components/ui/loading";
 import "react-datepicker/dist/react-datepicker.css";
 import { Suspense } from "react";
 import { Be_Vietnam_Pro, Bricolage_Grotesque } from "next/font/google";
-import { mono } from "@/helpers/font-client";
 
 const body = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
@@ -29,7 +27,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={`${body.variable} ${display.variable}`}>
-      <meta name="google-site-verification" content="SI9lUDpDSzVXJTFANBGfg32-6nUdgAh6t0LD-0axg8E" />
       <body className={body.className}>
         <Suspense fallback={<LoadingGlobal />}>{children}</Suspense>
         <div id="modal-root"></div>

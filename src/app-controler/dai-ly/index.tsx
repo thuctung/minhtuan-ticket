@@ -248,6 +248,7 @@ export default function DaiLyController() {
               </button>
             </div>
           </div>
+          <p className=" text-[11px] text-[red] text-destructive">{error}</p>
           <div className="space-y-2 md:col-span-2">
             <button
               disabled={submitting}
