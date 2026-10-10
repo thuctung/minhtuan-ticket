@@ -14,8 +14,10 @@ export async function POST(req: Request) {
   const { productSelected, orderCode, dateUse, orderId, customerEmail }: PayloadGetTicketSunType =
     await req.json();
   try {
-    const { data }: any = await sunWorldApi.post(`/ota/booking/confirm`, { orderCode });
-    const { result, messages, success } = data;
+    const { data: dataSunworld }: any = await sunWorldApi.post(`/ota/booking/confirm`, {
+      orderCode,
+    });
+    const { result, messages, success } = dataSunworld;
 
     if (success) {
       const { data: dataSaveOrder, error } = await supabaseAdmin.rpc(

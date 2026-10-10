@@ -56,6 +56,16 @@ export const SIDEBAR_ADMIN: MenuMgtType[] = [
     lable: "Lịch sử rút vé",
     icon: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8M3 3v5h5M12 7v5l4 2",
   },
+  {
+    link: "/admin/ticket-status",
+    lable: "Trạng thái vé",
+    icon: "M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z",
+  },
+  {
+    link: "/admin/booking-status",
+    lable: "Tra cứu booking",
+    icon: "M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z",
+  },
 ];
 
 export const SIDEBAR_AFF: MenuMgtType[] = [

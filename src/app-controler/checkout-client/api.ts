@@ -8,6 +8,7 @@ import {
   SUN_BOOKING_CANCLE,
   SUN_BOOKING_CONFIRM,
   SUN_BOOKING_CREATE,
+  SUN_GET_SITE_LIST,
 } from "@/commons/apiURL";
 import {
   ClientOrderItem,
@@ -99,6 +100,18 @@ export const senMailOrderProductInSystem = async (payload: SendTicketInSystemMai
   try {
     setGlobalLoading(true);
     const { data }: any = await api.post(SEND_MAIL_TICKET_IN_SYSTEM, payload);
+    return data;
+  } catch (e) {
+    setToastMessage("Có lỗi xảy ra");
+  } finally {
+    setGlobalLoading(false);
+  }
+};
+
+export const getListSite = async () => {
+  try {
+    setGlobalLoading(true);
+    const { data }: any = await api.get(SUN_GET_SITE_LIST);
     return data;
   } catch (e) {
     setToastMessage("Có lỗi xảy ra");
