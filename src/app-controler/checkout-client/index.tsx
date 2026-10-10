@@ -5,6 +5,7 @@ import {
   cancleBooking,
   customerCreateOrder,
   customerCreateOrderTicket,
+  getListSite,
   getTicketSunWorld,
   senMailOrderProductInSystem,
   updateStatusOrder,
@@ -133,7 +134,7 @@ export default function CheckoutControlerPage() {
     let dataOrderSunWorld: TicketReponseType | any = {};
 
     // STEP 1: CREATE ORDER WITH SUN WORLD
-    if (siteCode === SITE_CODES.BANAHILL) {
+    if (!in_system) {
       dataOrderSunWorld = await customerCreateOrder(paramCreateOrder);
       if (!dataOrderSunWorld) {
         passProcess = false;
@@ -299,6 +300,10 @@ export default function CheckoutControlerPage() {
       };
     }
   }, [qrPaymant?.code]);
+
+  useEffect(() => {
+    getListSite();
+  }, []);
 
   return (
     <main className="min-h-screen flex flex-col bg-background text-foreground">

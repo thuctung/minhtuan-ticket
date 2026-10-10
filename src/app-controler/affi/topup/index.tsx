@@ -62,7 +62,6 @@ export default function AffiliateTopupPageControl() {
 
   useEffect(() => {
     if (urlQR?.code) {
-      console.log("urlQR?.code", urlQR?.code);
       const channel = clientSupbase
         .channel("check-payment-aff")
         .on(
@@ -74,8 +73,6 @@ export default function AffiliateTopupPageControl() {
             filter: `payment_code=eq.${urlQR.code}`,
           },
           (payload) => {
-            console.log("payload", payload);
-
             if (payload.new.status === PAYMENT_STATUS.COMPLETED) {
               handleGetHistory();
               sv_getCurrentProfile(profile.user_id);

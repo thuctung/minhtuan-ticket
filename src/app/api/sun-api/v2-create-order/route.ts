@@ -18,14 +18,14 @@ export async function POST(req: Request) {
   const { date_use, order_id, thirdPartyNumber, products, email, phone, fullname, haveFOC } = body;
   let orderCode = "";
   try {
-    const { data }: any = await sunWorldApi.post(`/v2/order/create`, {
+    const { data: dataSunworld, error }: any = await sunWorldApi.post(`/v2/order/create`, {
       thirdPartyNumber,
       products,
       email,
       phone,
       fullname,
     });
-    const { result, messages, success } = data;
+    const { result, messages, success } = dataSunworld;
     orderCode = result?.orderCode || "";
     if (success) {
       const { data, error } = await supabaseAdmin.rpc(DB_TABLE_NAME.FUNC_COMPLETE_ORDER, {
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
         });
 
         return NextResponse.json(
-          { data: { focTickets, customerTickets }, messages: "" },
+          { data: { focTickets, customerTickets, data: dataSunworld }, messages: "" },
           { status: 200 }
         );
       } else {
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
       const resMess = messages?.[0] || "Lỗi khi tạo vé";
       await updateOrderError(order_id, `SUNWORLD-${resMess}`);
       return NextResponse.json(
-        { data: { focTickets: [], customerTickets: [] }, messages: resMess },
+        { data: { focTickets: [], customerTickets: [] }, messages: resMess, dataSunworld },
         { status: 200 }
       );
     }

@@ -1,4 +1,4 @@
-import { PHONE_ADMIN, PHONE_FILE_PDF, SITE_CODES, SITE_SUB_GROUP } from "@/commons/constant";
+import { PHONE_FILE_PDF, SITE_CODES, SITE_SUB_GROUP } from "@/commons/constant";
 import { formatVND } from "@/helpers/money";
 import { ProductSubmitType, TicketReponseType, TicketResultQRType } from "@/types/ticket";
 
