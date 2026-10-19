@@ -24,6 +24,13 @@ const STATUS_MAP = {
     bg: "bg-emerald-50",
     ring: "ring-emerald-200",
   },
+  onhold: {
+    label: "Đang đặt vé",
+    dot: "bg-green-500",
+    text: "text-green-700",
+    bg: "bg-green-50",
+    ring: "ring-green-200",
+  },
 };
 
 function StatusBadge({ status }: { status: string }) {
@@ -100,12 +107,14 @@ export default function BookingDetailCard({ booking }: { booking: TicketReponseT
     <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       {/* Header */}
       <div className="flex items-start justify-between gap-3 px-5 pt-5">
-        <button
-          onClick={handleDownloadFile}
-          className="rounded-lg border border-gray-200 px-4 py-2 bg-green-200 text-sm font-medium text-green-600 transition hover:bg-green-300"
-        >
-          Tải vé
-        </button>
+        {orderStatus === "success" ? (
+          <button
+            onClick={handleDownloadFile}
+            className="rounded-lg border border-gray-200 px-4 py-2 bg-green-200 text-sm font-medium text-green-600 transition hover:bg-green-300"
+          >
+            Tải vé
+          </button>
+        ) : null}
       </div>
 
       <div className="flex items-start justify-between gap-3 px-5 pt-5">

@@ -15,7 +15,8 @@ import { useCommonStore } from "@/stores/useCommonStore";
 import { isEmpty } from "lodash";
 
 export default function ToastMessage() {
-  const { messageToast }: CommonType = useCommonStore((state: any) => state);
+  const data: CommonType = useCommonStore((state: any) => state);
+  const { messageToast } = data;
   const { setToastMessage }: CommonType | any = useCommonStore.getState();
 
   const handleCloseToast = () => {

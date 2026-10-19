@@ -57,15 +57,15 @@ export async function POST(req: Request) {
 
         const { focTickets, customerTickets } = getTicketFOCAndCutomer(ticketBuild);
 
-        const pdfBuffer = await downloadTicketPDFServer(customerTickets, haveFOC ? focTickets : []);
+        // const pdfBuffer = await downloadTicketPDFServer(customerTickets, haveFOC ? focTickets : []);
 
         // Send Resend
-        await sendMailTicketBaNa({
-          mail: email,
-          siteName: siteName,
-          orderCode: result.orderCode,
-          fileAttch: pdfBuffer,
-        });
+        // await sendMailTicketBaNa({
+        //   mail: email,
+        //   siteName: siteName,
+        //   orderCode: result.orderCode,
+        //   fileAttch: pdfBuffer,
+        // });
 
         return NextResponse.json(
           { data: { focTickets, customerTickets, data: dataSunworld }, messages: "" },

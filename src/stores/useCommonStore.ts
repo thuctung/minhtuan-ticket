@@ -18,5 +18,8 @@ export const useCommonStore = create((set) => ({
   setToastMessage: (value: string) =>
     set((state: CommonType) => ({ ...state, messageToast: value })),
 
-  showConfirm: (value: string) => set((state: CommonType) => ({ ...state, confirm: value })),
+  showConfirm: (value: string) =>
+    set((state: CommonType) => {
+      return { ...state, confirm: value };
+    }),
 }));
