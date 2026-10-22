@@ -10,8 +10,6 @@ import { supabaseAdmin } from "@/lib/supabase/server";
 import { KEY_MODIFY_DATA } from "@/app-controler/affi/stats/contants";
 import { get } from "lodash";
 import { updateOrderError } from "@/helpers/update-status-order";
-import { downloadTicketPDFServer } from "@/helpers/ticket-server";
-import { sendMailTicketBaNa } from "@/axios/resendMail";
 
 export async function POST(req: Request) {
   const body: CreateOrderSunGroupPayload = await req.json();
@@ -45,30 +43,20 @@ export async function POST(req: Request) {
         const siteName: any = get(ticketBuild, [0, "siteName"]);
         await Promise.allSettled([
           supabaseAdmin.from(DB_TABLE_NAME.TICKETS).insert(ticketBuild).select(),
-          // supabaseAdmin.from(DB_TABLE_NAME.EMAIL_QUEUE).insert({
-          //   email: email,
-          //   order_id: order_id,
-          //   site_name: siteName || "",
-          //   order_code: result.orderCode,
-          //   status: KEY_MODIFY_DATA.PENDING,
-          //   is_send_foc: haveFOC,
-          // }),
+          supabaseAdmin.from(DB_TABLE_NAME.EMAIL_QUEUE).insert({
+            email: email,
+            order_id: order_id,
+            site_name: siteName || "",
+            order_code: result.orderCode,
+            status: KEY_MODIFY_DATA.PENDING,
+            is_send_foc: haveFOC,
+          }),
         ]);
 
         const { focTickets, customerTickets } = getTicketFOCAndCutomer(ticketBuild);
 
-        // const pdfBuffer = await downloadTicketPDFServer(customerTickets, haveFOC ? focTickets : []);
-
-        // Send Resend
-        // await sendMailTicketBaNa({
-        //   mail: email,
-        //   siteName: siteName,
-        //   orderCode: result.orderCode,
-        //   fileAttch: pdfBuffer,
-        // });
-
         return NextResponse.json(
-          { data: { focTickets, customerTickets, data: dataSunworld }, messages: "" },
+          { data: { focTickets, customerTickets }, messages: "" },
           { status: 200 }
         );
       } else {
