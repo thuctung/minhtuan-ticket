@@ -23,7 +23,7 @@ export const downloadTicketPDFServer = async (
   focTicket: TicketResultQRType[]
 ) => {
   const PAGE_W = 250;
-  const PAGE_H = 630;
+  const PAGE_H = 650;
   const pdf = new jsPDF({
     unit: "px",
     format: [PAGE_W, PAGE_H],
@@ -100,7 +100,7 @@ export const downloadTicketPDFServer = async (
     const qr = await QRCodePDF.toDataURL(isFOCTicket ? t.verifyCode : t.ticketNumber);
     pdf.addImage(qr, "PNG", leftX - 9, y, 120, 120);
 
-    pdf.setFontSize(10);
+    pdf.setFontSize(11);
     pdf.setFont("Roboto", "bold");
     const leftTextQR = 120;
     let yTextQR = y + 20;
@@ -190,7 +190,7 @@ export const downloadTicketPDFServer = async (
     // ===== HƯỚNG DẪN / INSTRUCTIONS =====
     pdf.setTextColor(...GREEN_LABEL);
     pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(9);
+    pdf.setFontSize(10);
     pdf.text("HƯỚNG DẪN SỬ DỤNG/USER GUIDE:", 18, y);
 
     y += 10;
@@ -199,7 +199,7 @@ export const downloadTicketPDFServer = async (
       if (texts?.length) {
         pdf.setFont("Roboto", "normal");
         pdf.setTextColor(...TEXT_GUIDE);
-        pdf.setFontSize(8);
+        pdf.setFontSize(9);
         pdf.setLineHeightFactor(1.5);
         texts?.forEach((g: string, index: number) => {
           const lines = pdf.splitTextToSize(`- ${g}`, PAGE_W - 36);
@@ -224,7 +224,7 @@ export const downloadTicketPDFServer = async (
     // ===== NOTE =====
     pdf.setTextColor(...GREEN_LABEL);
     pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(9);
+    pdf.setFontSize(10);
     pdf.text("LƯU Ý/NOTE:", 18, y);
 
     y += 10;
@@ -242,15 +242,17 @@ export const downloadTicketPDFServer = async (
     const r = 2;
     pdf.setFillColor(...GREEM_BRIGHT);
     // pdf.roundedRect(8, PAGE_H - 34, PAGE_W - 16, 26, r, r, "F");
-    pdf.rect(8, PAGE_H - 44, PAGE_W - 16, r, "F");
+    pdf.rect(8, PAGE_H - 50, PAGE_W - 16, r, "F");
     pdf.setTextColor(0, 0, 0);
     pdf.setFont("Roboto", "normal");
     pdf.setFontSize(12);
-    pdf.text("Minh Tuấn Travel", PAGE_W / 2 - 28, PAGE_H - 22, { align: "center" });
+    pdf.text("Công Ty TNHH MTV Minh Tuấn Travel", PAGE_W / 2, PAGE_H - 30, {
+      align: "center",
+    });
 
     pdf.setFont("Roboto", "normal");
-    pdf.setFontSize(9);
-    pdf.text(`· Hotline: ${PHONE_FILE_PDF}`, PAGE_W / 2 + 36, PAGE_H - 22, {
+    pdf.setFontSize(10);
+    pdf.text(`Hotline: ${PHONE_FILE_PDF}`, PAGE_W / 2, PAGE_H - 15, {
       align: "center",
     });
   }

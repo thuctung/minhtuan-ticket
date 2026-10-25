@@ -136,7 +136,7 @@ export const BANK_INFO = {
 
 export const PHONE_ADMIN = process.env.NEXT_PUBLIC_PHONE_ADMIN || "0905 202 586";
 
-export const PHONE_FILE_PDF = "0905 202 586";
+export const PHONE_FILE_PDF = "0905.202.586";
 
 export const SUN_GROUP = {
   swgSubscriptionKey: process.env.NEXT_PUBLIC_SUN_SWG_SUBSCRIPTION_KEY || "",
@@ -180,13 +180,12 @@ export const MENUS = [
     iconColor: "text-green-600",
   },
   {
-    link: "/dat-ve",
+    link: "/#",
     name: "Đặt vé",
     icon: Ticket,
     iconBg: "bg-green-50",
     iconColor: "text-green-600",
   },
-
   {
     link: "/#",
     name: "Giới thiệu",
@@ -203,7 +202,7 @@ export const MENUS = [
     iconColor: "text-gray-600",
   },
   {
-    link: "/dang-ky-dai-ly",
+    link: "/dai-ly",
     name: "Đại lý",
     icon: Store,
     iconBg: "bg-purple-50",
