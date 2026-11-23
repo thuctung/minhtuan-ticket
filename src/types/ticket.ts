@@ -79,6 +79,12 @@ export type TicketResultQRType = {
   siteName: string;
   personType: string;
   time: string;
+
+  floorName: string;
+  tableNum: string;
+  secName: string;
+  secNum: number;
+  reservationNo: string;
 };
 
 export type PromotionType = {
@@ -198,11 +204,16 @@ export type SubmitSelectTicket = {
 };
 
 export type TicketInItemType = {
-  status: string;
   ticketNumber: string;
   validDateFrom: string;
   validDateTo: string;
   verifyCode: string;
+  status: string;
+  floorName: string;
+  tableNum: string;
+  secName: string;
+  secNum: number;
+  reservationNo: string;
 };
 
 export type TicketItemReponseType = {

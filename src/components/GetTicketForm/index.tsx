@@ -26,9 +26,9 @@ import CustomerForm from "./Customer";
 import AffilateBooking from "./Affilate";
 
 const initFormValues = {
-  email: "",
-  phone: "",
-  fullname: "",
+  email: "thuctung190298@gmail.com",
+  phone: "0987654321",
+  fullname: "Tung",
   date_use: toDate,
   description: "",
 };

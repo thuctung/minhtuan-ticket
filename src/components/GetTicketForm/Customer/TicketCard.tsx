@@ -40,7 +40,7 @@ const TicketCard = React.memo(({ ticket, setQty, quantities, formType, agentPric
     } else {
       num += value;
     }
-    setQty(ticket.code, num);
+    setQty(ticket.code, value);
   };
   return (
     <div

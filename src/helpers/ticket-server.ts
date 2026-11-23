@@ -22,8 +22,8 @@ export const downloadTicketPDFServer = async (
   tickets: TicketResultQRType[],
   focTicket: TicketResultQRType[]
 ) => {
-  const PAGE_W = 250;
-  const PAGE_H = 650;
+  const PAGE_W = 270;
+  const PAGE_H = 700;
   const pdf = new jsPDF({
     unit: "px",
     format: [PAGE_W, PAGE_H],
@@ -49,8 +49,7 @@ export const downloadTicketPDFServer = async (
 
   // Colors dùng xuyên suốt (theo đúng mẫu thiết kế)
   const GREEM_BRIGHT = [97, 160, 94] as const; // dải tiêu đề / nút "Mã vé" / footer
-  const RED_DARK = [120, 14, 14] as const; // badge "MÃ ĐƠN"
-  const GREEN_LABEL = [180, 20, 24] as const; // chữ label màu đỏ
+  const GREEN_LABEL = [97, 160, 94] as const; // chữ label màu đỏ
   const TEXT_DARK = [40, 30, 30] as const;
   const TEXT_GUIDE = [70, 55, 55] as const;
 
@@ -69,7 +68,7 @@ export const downloadTicketPDFServer = async (
     let y = 14;
 
     // Khung viền ngoài bo góc
-    pdf.setDrawColor(225, 190, 190);
+    pdf.setDrawColor(97, 160, 94);
     pdf.setLineWidth(1);
     pdf.roundedRect(8, 8, PAGE_W - 16, PAGE_H - 16, 10, 10);
 
@@ -81,11 +80,10 @@ export const downloadTicketPDFServer = async (
 
     // ===== TITLE BAR (đỏ) — hỗ trợ xuống dòng =====
     pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(13);
+    pdf.setFontSize(14);
     const titleLines = pdf.splitTextToSize(t.productName, PAGE_W - 40);
     const lineHeight = 13;
     const titleBarPadding = 8;
-    const titleBarH = titleLines.length * lineHeight + titleBarPadding * 2 - 4;
 
     pdf.setTextColor(0, 0, 0);
     titleLines.forEach((line: string, idx: number) => {
@@ -98,11 +96,11 @@ export const downloadTicketPDFServer = async (
     // ===== QR BOX =====
     y += 20;
     const qr = await QRCodePDF.toDataURL(isFOCTicket ? t.verifyCode : t.ticketNumber);
-    pdf.addImage(qr, "PNG", leftX - 9, y, 120, 120);
+    pdf.addImage(qr, "PNG", leftX - 9, y, 140, 140);
 
     pdf.setFontSize(11);
     pdf.setFont("Roboto", "bold");
-    const leftTextQR = 120;
+    const leftTextQR = 140;
     let yTextQR = y + 20;
     //  ===== SITE =====
     pdf.setTextColor(...GREEN_LABEL);
@@ -111,7 +109,7 @@ export const downloadTicketPDFServer = async (
     pdf.text(get(SITE_SUB_GROUP, t.siteCode), leftTextQR + 17, yTextQR);
 
     if (!isFOCTicket) {
-      yTextQR += 16;
+      yTextQR += 14;
       // ===== PERSON TYPE =====
       pdf.setTextColor(...GREEN_LABEL);
       pdf.text("Đối tượng:", leftTextQR, yTextQR);
@@ -121,7 +119,7 @@ export const downloadTicketPDFServer = async (
 
     // ===== RESTAURANT =====
     if (t.restaurantName) {
-      yTextQR += 16;
+      yTextQR += 14;
       // ===== RESTAURANT =====
       pdf.setTextColor(...GREEN_LABEL);
       pdf.text("Khu vực:", leftTextQR, yTextQR);
@@ -129,14 +127,14 @@ export const downloadTicketPDFServer = async (
       pdf.text(t.restaurantName, leftTextQR + 31, yTextQR);
     }
     // ===== PRICE =====
-    yTextQR += 16;
+    yTextQR += 14;
     pdf.setTextColor(...GREEN_LABEL);
     pdf.text("Giá/Price:", leftTextQR, yTextQR);
     pdf.setTextColor(...TEXT_DARK);
     pdf.text(isFOCTicket ? "0 ₫" : formatVND(t.publicPrice), leftTextQR + 36, yTextQR);
 
     // ===== DATE USE =====
-    yTextQR += 16;
+    yTextQR += 14;
     pdf.setTextColor(...GREEN_LABEL);
     pdf.text("Ngày sử dụng/ Use date:", leftTextQR, yTextQR);
     yTextQR += 10;
@@ -148,7 +146,33 @@ export const downloadTicketPDFServer = async (
       yTextQR
     );
 
-    y += 120;
+    // ===== FLOOR =====
+    if (t.floorName) {
+      yTextQR += 14;
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Tầng/Floor:", leftTextQR, yTextQR);
+      pdf.setTextColor(...TEXT_DARK);
+      pdf.text(t.floorName, leftTextQR + 44, yTextQR);
+    }
+    // ===== ZONE =====
+    if (t.secName) {
+      yTextQR += 14;
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Zone: ", leftTextQR, yTextQR);
+      pdf.setTextColor(...TEXT_DARK);
+      pdf.text(t.secName, leftTextQR + 23, yTextQR);
+    }
+
+    // ===== TABLE =====
+    if (t.secName) {
+      yTextQR += 14;
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Bàn/Table:", leftTextQR, yTextQR);
+      pdf.setTextColor(...TEXT_DARK);
+      pdf.text(t.tableNum, leftTextQR + 42, yTextQR);
+    }
+
+    y += 145;
     pdf.setTextColor(...GREEN_LABEL);
     // ===== Media Code =====
     pdf.text("Media Code:", leftX, y);
