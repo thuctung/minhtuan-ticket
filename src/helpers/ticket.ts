@@ -218,7 +218,7 @@ export const downloadTicketPDF = async (
       pdf.setTextColor(...GREEN_LABEL);
       pdf.text("Bàn/Table:", leftTextQR, yTextQR);
       pdf.setTextColor(...TEXT_DARK);
-      pdf.text(t.tableNum, leftTextQR + 42, yTextQR);
+      pdf.text(t.tableNum + "", leftTextQR + 42, yTextQR);
     }
 
     y += 145;
