@@ -1,11 +1,12 @@
 import { ButtonProp } from "@/types";
 
-export function ButtonCommon({ title, onClick, ...prop }: ButtonProp) {
+export function ButtonCommon(props: ButtonProp) {
+  const { title, onClick } = props;
   return (
     <button
-      {...prop}
+      {...props}
       onClick={onClick}
-      className="px-8 py-2.5 rounded-xl bg-blue-600 font-bold text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-all flex items-center gap-2"
+      className={`h-10 rounded-md bg-teal-700 px-5 text-sm font-medium text-white hover:bg-teal-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 ${props.className || ""}`}
     >
       {title}
     </button>

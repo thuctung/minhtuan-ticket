@@ -45,6 +45,28 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --font-sans: var(--f-body);
+  --font-display: var(--f-display);
+  --color-ink: #0b2f3a;
+  --color-lagoon: #14808a;
+  --color-lagoon-dark: #0f5f68;
+  --color-foam: #e6f4f1;
+  --color-sun: #ffb32b;
+}
+
+.scene {
+  min-height: 100vh;
+  background:
+    radial-gradient(520px 520px at 85% 80px, rgba(255, 179, 43, 0.65), transparent 65%),
+    radial-gradient(800px 500px at 0% 0%, rgba(20, 128, 138, 0.7), transparent 65%),
+    linear-gradient(180deg, #0b2f3a 0, #12636d 380px, #cfe8e3 760px, #eaf5f2 100%);
+  background-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
 
 :root {
@@ -155,4 +177,93 @@ tbody {
 .table-wrapper {
   max-width: 900px;
   overflow-x: auto;
+}
+
+@theme {
+  --color-sea: #0a3d4a;
+  --color-lagoon: #14a3a0;
+  --color-mist: #eaf5f4;
+  --color-sun: #f5b820;
+  --color-ink: #12262b;
+  --font-sans: var(--font-main), ui-sans-serif, system-ui, sans-serif;
+  --color-paper: #f4f8f9;
+  --color-ocean: #0b3c5d;
+  --color-lagoon: #14a3a0;
+  --color-sun: #ffc23d;
+  --color-ink: #10222f;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-head), system-ui, sans-serif;
+
+  --color-sea: #0a3d4a;
+  --color-lagoon: #14a3a0;
+  --color-mist: #eaf5f4;
+  --color-sun: #f5b820;
+  --color-ink: #12262b;
+  --font-sans: var(--font-main), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-wiggle: wiggle 0.6s ease-in-out;
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    20% {
+      transform: rotate(-2deg);
+    }
+    40% {
+      transform: rotate(2deg);
+    }
+    60% {
+      transform: rotate(-1.5deg);
+    }
+    80% {
+      transform: rotate(1deg);
+    }
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Vé: hai nửa tròn khuyết ở cạnh + đường đứt nét */
+.ticket {
+  position: relative;
+}
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: var(--notch, 62%);
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--color-paper);
+  transform: translateY(-50%);
+}
+.ticket::before {
+  left: -11px;
+}
+.ticket::after {
+  right: -11px;
+}
+.ticket-tear {
+  border-top: 2px dashed rgb(16 34 47 / 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@keyframes rotateY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }

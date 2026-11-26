@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "title": "Moon Prince",
+    "description": "Vé du lịch Đà Nẵng"
+  },
+  "hero": {
+    "title": "Trọn vẹn từng chuyến đi",
+    "description": "Vé tham quan, cáp treo, công viên giải trí và tour trọn gói ở hơn 60 tỉnh thành. Nhận vé điện tử ngay sau khi thanh toán.",
+    "search_location": "Tìm địa điểm",
+    "search_placeholder": "Bạn muốn đi đâu?",
+    "search_button": "Tìm vé",
+    "location_found": "Tôi đã tìm thấy công viên bạn muốn mua vé. Bạn có muốn đến trang mua vé cho công viên này không?",
+    "location_not_found": "Không tìm thấy địa điểm",
+    "location_not_found_description": "Chúng tôi không tìm thấy địa điểm phù hợp. Bạn có muốn chuyển đến trang mua vé để xem tất cả vé không?",
+    "stay": "Ở lại",
+    "go_to_ticket_page": "Đến trang mua vé"
+  },
+  "tickets": {
+    "eyebrow": "VÉ DU LỊCH - KHU VUI CHƠI",
+    "title": "VÉ DU LỊCH - KHU VUI CHƠI",
+    "description": "Chọn điểm đến, nhận mã QR vào cổng.",
+    "view_more": "Xem thêm →",
+    "price_from": "Giá từ",
+    "buy": "Mua vé"
+  },
+  "tours": {
+    "eyebrow": "TOUR DU LỊCH - VÉ MÁY BAY",
+    "title": "TOUR DU LỊCH - VÉ MÁY BAY",
+    "description": "Trọn gói vé, xe đưa đón và khách sạn.",
+    "book": "Liên hệ",
+    "message": "Đã gửi thành công! Chúng tôi sẽ liên hệ bạn sớm.",
+    "success": "Gửi yêu cầu thành công",
+    "items": [
+      {
+        "name": "Vịnh Hạ Long 2N1Đ",
+        "departure": "Khởi hành từ Hà Nội · 2 ngày 1 đêm",
+        "original_price": "4.300.000 ₫",
+        "price": "3.890.000 ₫"
+      },
+      {
+        "name": "Phú Quốc nghỉ dưỡng",
+        "departure": "Khởi hành từ TP.HCM · 3 ngày 2 đêm",
+        "original_price": "13.900.000 ₫",
+        "price": "10.290.000 ₫"
+      },
+      {
+        "name": "Đà Nẵng – Hội An – Bà Nà",
+        "departure": "Khởi hành từ Đà Nẵng · 4 ngày 3 đêm",
+        "original_price": "7.800.000 ₫",
+        "price": "6.150.000 ₫"
+      },
+      {
+        "name": "Sa Pa – Fansipan",
+        "departure": "Khởi hành từ Hà Nội · 3 ngày 2 đêm",
+        "original_price": "5.200.000 ₫",
+        "price": "4.750.000 ₫"
+      }
+    ]
+  },
+  "consultation": {
+    "title": "TƯ VẤN TOUR",
+    "description": "Để lại thông tin, đội ngũ tư vấn sẽ liên hệ lại trong thời gian sớm nhất để báo giá và thiết kế lịch trình phù hợp với bạn.",
+    "benefits": [
+      "Tư vấn miễn phí, không ràng buộc",
+      "Lịch trình riêng cho gia đình, nhóm, công ty",
+      "Phản hồi trong vòng 24 giờ"
+    ],
+    "name": "Họ và tên",
+    "name_placeholder": "Nguyễn Văn A",
+    "phone": "Số điện thoại",
+    "phone_placeholder": "09xx xxx xxx",
+    "email": "Email",
+    "email_placeholder": "email@example.com",
+    "destination": "Điểm đến quan tâm",
+    "destination_placeholder": "Chưa chọn / cần tư vấn",
+    "people": "Số người",
+    "date": "Ngày đi",
+    "message": "Lời nhắn",
+    "message_placeholder": "Ngân sách, sở thích, số trẻ em, yêu cầu đặc biệt...",
+    "submit": "Gửi yêu cầu tư vấn"
+  },
+  "about": {
+    "eyebrow": "Về chúng tôi",
+    "title": "Đồng hành cùng mọi chuyến đi",
+    "description": "Chúng tôi cung cấp vé tham quan, vui chơi và dịch vụ tour với mức giá minh bạch, thủ tục nhanh gọn và mã QR vào cổng ngay sau khi đặt. Hơn nhiều năm hoạt động, Moon Prince đã trở thành địa chỉ quen thuộc của hàng trăm nghìn du khách và đối tác trên khắp cả nước.",
+    "highlights": [
+      "Đối tác chính thức của các khu du lịch",
+      "Giấy phép kinh doanh lữ hành quốc tế",
+      "Top đơn vị bán vé uy tín 2025",
+      "Hỗ trợ khách hàng 24/7"
+    ],
+    "learn_more": "Xem thêm về chúng tôi",
+    "stats": [
+      {
+        "value": "8+",
+        "label": "Năm kinh nghiệm"
+      },
+      {
+        "value": "500.000+",
+        "label": "Lượt khách phục vụ"
+      },
+      {
+        "value": "30+",
+        "label": "Đối tác điểm đến"
+      },
+      {
+        "value": "98%",
+        "label": "Khách hài lòng"
+      }
+    ]
+  },
+  "title": "Liên hệ chính thức",
+  "description": "Gọi hoặc nhắn cho chúng tôi để được hỗ trợ đặt vé, thanh toán và giải quyết vấn đề về dịch vụ.",
+  "footer": {
+    "brand": "Moon Prince",
+    "description": "Hệ thống đặt vé tham quan và du lịch trực tuyến. Đồng hành cùng bạn trên mỗi hành trình khám phá.",
+    "policies_title": "Chính sách & điều khoản",
+    "customer_support": "Hỗ trợ khách hàng",
+    "privacy": "Chính sách bảo mật",
+    "pricing": "Chính sách giá",
+    "serviceConditions": "Các điều kiện hoặc hạn chế trong việc cung cấp dịch vụ",
+    "payment": "Chính sách thanh toán",
+    "refund": "Chính sách giao vé, đổi trả và hoàn tiền",
+    "complaints": "Phương thức tiếp nhận và giải quyết phản ánh, yêu cầu, khiếu nại",
+    "support": "Hình thức hỗ trợ trực tuyến",
+    "ownership": "Thông tin chủ sở hữu",
+    "copyright": "© 2026 Moon Prince. All rights reserved.",
+    "tagline": "Khám phá hành trình · Lưu giữ trải nghiệm"
+  }
+}

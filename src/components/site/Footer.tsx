@@ -1,76 +1,124 @@
-import { PHONE_ADMIN } from "@/commons/constant";
+import { getTranslation } from "@/lib/i18n";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function Footer() {
+const policies1 = [
+  { title: "homepage.footer.privacy", href: "/chinh-sach/bao-mat" },
+  {
+    title: "homepage.footer.pricing",
+    href: "/chinh-sach/gia",
+  },
+  {
+    title: "homepage.footer.serviceConditions",
+    href: "/chinh-sach/dieu-kien-dich-vu",
+  },
+
+  { title: "homepage.footer.payment", href: "/chinh-sach/thanh-toan" },
+  {
+    title: "homepage.footer.refund",
+    href: "/chinh-sach/doi-tra-hoan-tien",
+  },
+];
+
+const policies2 = [
+  {
+    title: "homepage.footer.complaints",
+    href: "/chinh-sach/giai-quyet-khieu-nai",
+  },
+  {
+    title: "homepage.footer.support",
+    href: "/chinh-sach/ho-tro",
+  },
+  {
+    title: "homepage.footer.ownership",
+    href: "/chinh-sach/thong-tin-chu-so-huu",
+  },
+];
+
+export default async function Footer({ lng }: { lng: string }) {
+  const { t } = await getTranslation(lng);
+
   return (
-    <footer className="bg-[#272625] text-neutral-400 py-16 text-sm">
-      <div className="container mx-auto  max-w-6xl">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-[#12391f] via-[#174c2a] to-[#0b2918] text-white">
+      <div className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full bg-emerald-400/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -left-20 h-80 w-80 rounded-full bg-amber-300/5 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-14">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-16">
           <div>
-            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Minh Tuấn Travel</h4>
-            <p className="text-neutral-400 leading-relaxed">
-              Mua vé du lịch nhanh chóng và tiện lợi.
+            <Link
+              href="/"
+              className="inline-block text-2xl font-bold tracking-tight text-white transition hover:text-amber-300"
+            >
+              <span className="text-amber-300">Moon Prince</span>
+            </Link>
+
+            <p className="mt-4 max-w-sm text-sm leading-7 text-emerald-50/70">
+              {t("homepage.footer.description")}
             </p>
+            <div className="mt-6 h-1 w-14 rounded-full bg-gradient-to-r from-amber-300 to-amber-100" />
           </div>
+
+          {/* Chính sách */}
           <div>
-            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Liên Kết</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a href="#services" className="hover:text-white transition-colors">
-                  Dịch vụ
-                </a>
-              </li>
-              <li>
-                <a href="#sites" className="hover:text-white transition-colors">
-                  Khu du lịch
-                </a>
-              </li>
-              <li>
-                <a href="#agent" className="hover:text-white transition-colors">
-                  Đại lý
-                </a>
-              </li>
+            <h3 className="mb-5 text-base font-bold text-white">
+              {t("homepage.footer.policies_title")}
+            </h3>
+
+            <ul className="space-y-3">
+              {policies1.map((item, index) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="group inline-flex items-center gap-2 text-sm text-emerald-50/70 transition-colors duration-200 hover:text-amber-300"
+                  >
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-300/50 transition-colors group-hover:bg-amber-300" />
+                    {t(item.title)}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Hỗ trợ */}
           <div>
-            <h4 className="text-white text-base font-bold mb-4 tracking-wider">Chính Sách</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Điều khoản sử dụng
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Chính sách bảo mật
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Quy trình hoàn tiền
-                </a>
-              </li>
+            <h3 className="mb-5 text-base font-bold text-white">
+              {t("homepage.footer.customer_support")}
+            </h3>
+
+            <ul className="space-y-3">
+              {policies2.map((item, index) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="group inline-flex items-center gap-2 text-sm text-emerald-50/70 transition-colors duration-200 hover:text-amber-300"
+                  >
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-emerald-300/50 transition-colors group-hover:bg-amber-300" />
+                    {t(item.title)}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          <div>
-            <h4 className="text-white text-base font-bold tracking-wider mb-4">Liên Hệ</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <p>
-                  Hotline: <span className="text-white">{PHONE_ADMIN}</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  Email: <span className="text-white">{process.env.NEXT_PUBLIC_EMAIL_COMPANY}</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  Địa chỉ:
-                  <span className="text-white">50 Hoàng Thúc Trâm,Phường Hoà Cường,TP.Đà Nẵng</span>
-                </p>
-              </li>
-            </ul>
+        </div>
+        <div className="flex w-full justify-end">
+          <Link
+            href="https://online.gov.vn/nen-tang/490fbd81-8ed8-4a84-a79b-e00d977f7294"
+            target="_blank"
+          >
+            <Image
+              alt="Logo_XacNhan_Platform"
+              src="/Logo_XacNhan_Platform.png"
+              width={155}
+              height={175}
+            />
+          </Link>
+        </div>
+        <div className="mt-10 border-t border-white/15 pt-6 md:mt-12">
+          <div className="flex flex-col items-center justify-between gap-3 text-center text-xs text-emerald-50/55 sm:flex-row sm:text-left">
+            <p>{t("homepage.footer.copyright")}</p>
+
+            <p className="text-emerald-50/45">{t("homepage.footer.tagline")}</p>
           </div>
         </div>
       </div>

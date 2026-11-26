@@ -1,15 +1,15 @@
-import { Input } from "@/components/ui/customs/input";
-import { ResetButton } from "@/components/ui/customs/ressetButton";
 import { SearchButton } from "@/components/ui/customs/searchButton";
 import { SelectBox } from "@/components/ui/customs/selectBox";
 import DatePickerCustom from "@/components/ui/date-picker";
 
 import { SearchTicketSale } from "@/types";
-import { Calendar, MapPin, User } from "lucide-react";
+import { Calendar, User } from "lucide-react";
 import { StatusData } from "@/app-controler/affi/stats/contants";
 import DropdownSearch from "@/components/ui/dropdown-search";
 import { ListAffDropdownType } from "../type";
 import { SiteType } from "@/types/ticket";
+import { inputCls } from "@/components/ui/const-class";
+import { ButtonCommon } from "@/components/ui/customs/buttonCommon";
 
 type SearchTicketFormProps = {
   onChangeForm: (key: string, value: string) => void;
@@ -17,6 +17,7 @@ type SearchTicketFormProps = {
   searchValue: SearchTicketSale;
   listAff: ListAffDropdownType[];
   listSite: SiteType[];
+  handleExcel: () => void;
 };
 
 export function SearchReport({
@@ -24,6 +25,7 @@ export function SearchReport({
   listAff,
   listSite,
   onChangeForm,
+  handleExcel,
   onSearch,
 }: SearchTicketFormProps) {
   return (
@@ -64,7 +66,6 @@ export function SearchReport({
             <SelectBox
               value={searchValue.status || ""}
               onChange={(value) => onChangeForm("status", value)}
-              className=" h-12"
             >
               <option value="">Tất cả</option>
               {Object.keys(StatusData).map((key: string) => (
@@ -82,10 +83,9 @@ export function SearchReport({
             <SelectBox
               value={searchValue.siteCode || ""}
               onChange={(value) => onChangeForm("siteCode", value)}
-              className=" h-12"
             >
               <option value="">Tất cả</option>
-              {listSite.map((item) => (
+              {listSite?.map((item) => (
                 <option key={item.code} value={item.code}>
                   {item.name}
                 </option>
@@ -110,30 +110,31 @@ export function SearchReport({
             <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center gap-2">
               <User size={14} /> Email đại lý
             </label>
-            <Input
+            <input
+              className={inputCls}
               type="text"
               placeholder="email "
               value={searchValue.email || ""}
-              className="h-12"
-              onChange={(value: string) => onChangeForm("email", value)}
+              onChange={(e) => onChangeForm("email", e.target.value)}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center gap-2">
               Third party code
             </label>
-            <Input
+            <input
+              className={inputCls}
               type="text"
               placeholder=""
               value={searchValue.third_party_number || ""}
-              className="h-12"
-              onChange={(value: string) => onChangeForm("third_party_number", value)}
+              onChange={(e) => onChangeForm("third_party_number", e.target.value)}
             />
           </div>
         </div>
         <div className=" flex flex-wrap justify-end  pr-3">
           <div className="flex justify-end gap-3 mt-6">
             <SearchButton onClick={onSearch} />
+            <ButtonCommon title="Export Excel" onClick={handleExcel} />
           </div>
         </div>
       </div>

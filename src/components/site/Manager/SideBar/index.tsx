@@ -31,8 +31,8 @@ export default function SideBarManager({
 
       <aside
         className={[
-          "fixed md:sticky top-10 left-0 h-screen z-40 flex flex-col gap-5 bg-[#247719b5] text-[white] ",
-          "bg-paper border-r border-line px-3.5 py-5  top-[40px]",
+          "fixed md:sticky top-10 left-0 h-screen z-40 flex flex-col gap-5 bg-[#247719] text-[white] ",
+          "border-r border-line px-3.5 py-5  top-[40px]",
           "transition-[width,transform, top] duration-300 ease-in-out overflow-x-hidden",
           collapsed ? "md:w-[76px]" : "md:w-[264px]",
           "w-[264px]",
@@ -43,7 +43,7 @@ export default function SideBarManager({
         <div className="flex items-center justify-between px-2 pb-1">
           <button
             onClick={onToggleCollapse}
-            className="hidden md:flex h-8 w-8 shrink-0 items-center justify-center rounded-[9px] border border-line bg-paper text-ink-soft transition-colors hover:border-red-100 hover:bg-red-50 hover:text-red-600"
+            className="hidden md:flex h-8 w-8 shrink-0 items-center justify-center rounded-[9px] border border-line  text-ink-soft transition-colors hover:border-red-100 hover:bg-red-50 hover:text-red-600"
             aria-label="Thu gọn / mở rộng menu"
           >
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}

@@ -22,8 +22,8 @@ export const downloadTicketPDFServer = async (
   tickets: TicketResultQRType[],
   focTicket: TicketResultQRType[]
 ) => {
-  const PAGE_W = 250;
-  const PAGE_H = 630;
+  const PAGE_W = 270;
+  const PAGE_H = 700;
   const pdf = new jsPDF({
     unit: "px",
     format: [PAGE_W, PAGE_H],
@@ -41,7 +41,7 @@ export const downloadTicketPDFServer = async (
   pdf.addFont("Roboto-Bold.ttf", "Roboto", "bold");
 
   // Load logos
-  const minhTuanlogo = getImage("/logo1.png");
+  const moonPrice = getImage("/moonlogo.png");
 
   const logo = LogoBySite[finalList[0].siteCode as keyof typeof LogoBySite] ?? LogoBySite.HLS;
 
@@ -50,7 +50,7 @@ export const downloadTicketPDFServer = async (
   // Colors dùng xuyên suốt (theo đúng mẫu thiết kế)
   const GREEM_BRIGHT = [97, 160, 94] as const; // dải tiêu đề / nút "Mã vé" / footer
   const RED_DARK = [120, 14, 14] as const; // badge "MÃ ĐƠN"
-  const RED_LABEL = [180, 20, 24] as const; // chữ label màu đỏ
+  const GREEN_LABEL = [180, 20, 24] as const; // chữ label màu đỏ
   const TEXT_DARK = [40, 30, 30] as const;
   const TEXT_GUIDE = [70, 55, 55] as const;
 
@@ -74,21 +74,18 @@ export const downloadTicketPDFServer = async (
     pdf.roundedRect(8, 8, PAGE_W - 16, PAGE_H - 16, 10, 10);
 
     // ===== HEADER: 2 logo =====
-    pdf.addImage(sunWorldLogo, "PNG", 18, y, 70, 22);
-    pdf.addImage(minhTuanlogo, "PNG", PAGE_W - 50, y, 32, 24);
+    pdf.addImage(sunWorldLogo, "PNG", 18, y, 70, 35);
+    pdf.addImage(moonPrice, "PNG", PAGE_W - 50, y + 5, 30, 22);
 
-    y += 24;
+    y += 34;
 
     // ===== TITLE BAR (đỏ) — hỗ trợ xuống dòng =====
     pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(13);
+    pdf.setFontSize(14);
     const titleLines = pdf.splitTextToSize(t.productName, PAGE_W - 40);
     const lineHeight = 13;
     const titleBarPadding = 8;
-    const titleBarH = titleLines.length * lineHeight + titleBarPadding * 2 - 4;
 
-    // pdf.setFillColor(...GREEM_BRIGHT);
-    // pdf.rect(8, y, PAGE_W - 16, titleBarH, "F");
     pdf.setTextColor(0, 0, 0);
     titleLines.forEach((line: string, idx: number) => {
       pdf.text(line, PAGE_W / 2, y + titleBarPadding + 6 + idx * lineHeight, {
@@ -96,141 +93,127 @@ export const downloadTicketPDFServer = async (
       });
     });
 
-    y += titleBarH + 16;
     const leftX = 18;
-    const rightX = PAGE_W - 18;
+    // ===== QR BOX =====
+    y += 17;
+    const qr = await QRCodePDF.toDataURL(isFOCTicket ? t.verifyCode : t.ticketNumber);
+    pdf.addImage(qr, "PNG", leftX - 9, y, 140, 140);
 
-    // ===== Site Name / đối tượng / Nhà Hàng  =====
-    pdf.setFontSize(10);
-    pdf.setTextColor(...RED_LABEL);
-    pdf.setFont("Roboto", "normal");
-    pdf.text("Site:", leftX, y);
-    pdf.setTextColor(...TEXT_DARK);
+    pdf.setFontSize(11);
     pdf.setFont("Roboto", "bold");
-    pdf.text(get(SITE_SUB_GROUP, t.siteCode), leftX + 18, y);
+    const leftTextQR = 140;
+    let yTextQR = y + 20;
+    //  ===== SITE =====
+    pdf.setTextColor(...GREEN_LABEL);
+    pdf.text("Site:", leftTextQR, yTextQR);
+    pdf.setTextColor(...TEXT_DARK);
+    pdf.text(get(SITE_SUB_GROUP, t.siteCode), leftTextQR + 17, yTextQR);
 
     if (!isFOCTicket) {
-      y += 12;
-      pdf.setTextColor(...RED_LABEL);
-      pdf.setFont("Roboto", "normal");
-      pdf.text("Đối tượng/Type:", leftX, y);
+      yTextQR += 14;
+      // ===== PERSON TYPE =====
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Đối tượng:", leftTextQR, yTextQR);
       pdf.setTextColor(...TEXT_DARK);
-      pdf.setFont("Roboto", "bold");
-      pdf.text(getPerSonTypeName(t.personType), leftX + 57, y);
+      pdf.text(getPerSonTypeName(t.personType), leftTextQR + 39, yTextQR);
     }
 
+    // ===== RESTAURANT =====
     if (t.restaurantName) {
-      y += 12;
-      pdf.setTextColor(...RED_LABEL);
-      pdf.setFont("Roboto", "normal");
-      pdf.text("Nhà hàng/Restaurant:", leftX, y);
-
+      yTextQR += 14;
+      // ===== RESTAURANT =====
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Khu vực:", leftTextQR, yTextQR);
       pdf.setTextColor(...TEXT_DARK);
-      pdf.setFont("Roboto", "bold");
-      pdf.text(t.restaurantName, leftX + 75, y, { align: "left" });
-      // y += 12;
-      // pdf.setTextColor(...RED_LABEL);
-      // pdf.text("Giờ/Time:", leftX, y);
-
-      // pdf.setTextColor(...TEXT_DARK);
-      // pdf.text(t.time, leftX + 36, y, { align: "left" });
+      pdf.text(t.restaurantName, leftTextQR + 33, yTextQR);
     }
-
-    y += 16;
-
-    // ===== MÃ ĐƠN (trái) / ORDER (phải) =====
-
-    pdf.setTextColor(...RED_LABEL);
-    pdf.setFont("Roboto", "normal");
-    pdf.setFontSize(7);
-    pdf.text("MÃ ĐƠN", leftX, y);
-    pdf.text("Mã Booking", rightX - 40, y, { align: "right" });
-
-    y += 6;
-
-    pdf.setFont("Roboto", "bold");
-    pdf.setFillColor(...RED_DARK);
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(10);
-
-    pdf.roundedRect(leftX, y, 90, 18, 4, 4, "F");
-    pdf.text(String(t.orderCode), leftX + 45, y + 12, { align: "center" });
-
-    pdf.setFillColor(...RED_DARK);
-    pdf.roundedRect(rightX - 70, y, 70, 18, 4, 4, "F");
-    pdf.setTextColor(255, 255, 255);
-
-    pdf.text(String(t.pnr), rightX - 10, y + 12, { align: "right" });
-
-    y += 30;
-
-    // ===== NGÀY SỬ DỤNG / Giá
-    pdf.setTextColor(...RED_LABEL);
-    pdf.setFont("Roboto", "normal");
-    pdf.setFontSize(7);
-    pdf.text("Ngày sử dụng/ Use date", leftX, y);
-
-    pdf.setFontSize(7);
-    pdf.text("Giá", rightX - 67, y);
-
-    y += 10;
-
+    // ===== PRICE =====
+    yTextQR += 14;
+    pdf.setTextColor(...GREEN_LABEL);
+    pdf.text("Giá/Price:", leftTextQR, yTextQR);
     pdf.setTextColor(...TEXT_DARK);
-    pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(11);
+    pdf.text(isFOCTicket ? "0 ₫" : formatVND(t.publicPrice), leftTextQR + 37, yTextQR);
+
+    // ===== DATE USE =====
+    yTextQR += 14;
+    pdf.setTextColor(...GREEN_LABEL);
+    pdf.text("Ngày sử dụng/ Use date:", leftTextQR, yTextQR);
+    yTextQR += 10;
+    pdf.setTextColor(...TEXT_DARK);
     pdf.text(
       `${dayjs(t.validDateFrom, FULL_DATE_TIME_FORMAT).format(BASIC_DATE_FORMAT)}/${dayjs(t.validDateTo, FULL_DATE_TIME_FORMAT).format(BASIC_DATE_FORMAT)}` ||
         "",
-      leftX,
-      y
+      leftTextQR,
+      yTextQR
     );
 
-    pdf.text(isFOCTicket ? "0 ₫" : formatVND(t.publicPrice), rightX - 67, y);
-
-    y += 10;
-
-    // ===== QR BOX =====
-    const qrBoxH = 96;
-    pdf.setDrawColor(...GREEM_BRIGHT);
-    pdf.setLineWidth(1.2);
-    pdf.roundedRect(18, y, PAGE_W - 36, qrBoxH, 8, 8);
-
-    const qr = await QRCodePDF.toDataURL(isFOCTicket ? t.verifyCode : t.ticketNumber);
-    pdf.addImage(qr, "PNG", 20, y + 10, 80, 80);
-
-    pdf.setTextColor(...RED_LABEL);
-    pdf.setFont("Roboto", "normal");
-    pdf.setFontSize(7);
-    pdf.text("SỐ / SERIAL", 104, y + 22);
-
-    pdf.setTextColor(...TEXT_DARK);
-    pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(11);
-
-    if (isFOCTicket) {
-      pdf.text(`${indexFOCTicket}/${focTicket.length}`, 104, y + 34);
-    } else {
-      pdf.text(`${indexTicket}/${tickets.length}`, 104, y + 34);
+    // ===== FLOOR =====
+    if (t.floorName) {
+      yTextQR += 14;
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Tầng/Floor:", leftTextQR, yTextQR);
+      pdf.setTextColor(...TEXT_DARK);
+      pdf.text(t.floorName, leftTextQR + 44, yTextQR);
+    }
+    // ===== ZONE =====
+    if (t.secName) {
+      yTextQR += 14;
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Zone: ", leftTextQR, yTextQR);
+      pdf.setTextColor(...TEXT_DARK);
+      pdf.text(t.secName, leftTextQR + 23, yTextQR);
     }
 
-    pdf.setFillColor(...GREEM_BRIGHT);
-    pdf.roundedRect(104, y + 46, PAGE_W - 36 - 96, 28, 5, 5, "F");
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFont("Roboto", "normal");
-    pdf.setFontSize(6);
-    pdf.text("Media Code", 104 + (PAGE_W - 36 - 96) / 2, y + 57, {
-      align: "center",
-    });
-    pdf.setFont("Roboto", "bold");
-    pdf.setFontSize(9);
-    pdf.text(isFOCTicket ? t.verifyCode : t.ticketNumber, 104 + (PAGE_W - 36 - 96) / 2, y + 68, {
-      align: "center",
-    });
+    // ===== TABLE =====
+    if (t.secName) {
+      yTextQR += 14;
+      pdf.setTextColor(...GREEN_LABEL);
+      pdf.text("Bàn/Table:", leftTextQR, yTextQR);
+      pdf.setTextColor(...TEXT_DARK);
+      pdf.text(t.tableNum + "", leftTextQR + 42, yTextQR);
+    }
 
-    y += qrBoxH + 18;
+    y += 145;
+    pdf.setTextColor(...GREEN_LABEL);
+    // ===== Media Code =====
+    pdf.text("Media Code:", leftX, y);
+    pdf.setTextColor(...TEXT_DARK);
+    pdf.setFont("Roboto", "bold");
+    pdf.text(isFOCTicket ? t.verifyCode : t.ticketNumber, leftX + 48, y);
+    // ===== PNJ CODE =====
+    y += 15;
+    pdf.setTextColor(...GREEN_LABEL);
+    pdf.text("Order:", leftX, y);
+    pdf.setTextColor(...TEXT_DARK);
+    pdf.text(String(t.pnr), leftX + 23, y);
+    // ===== ORDER CODE =====
+    y += 15;
+    pdf.setTextColor(...GREEN_LABEL);
+    pdf.text("Mã Đơn:", leftX, y);
+    pdf.setTextColor(...TEXT_DARK);
+    pdf.text(String(t.orderCode), leftX + 33, y);
+    // ===== SERIAL =====
+    y += 15;
+    pdf.setTextColor(...GREEN_LABEL);
+    pdf.text("STT:", leftX, y);
+    pdf.setTextColor(...TEXT_DARK);
+
+    if (isFOCTicket) {
+      pdf.text(`${indexFOCTicket}/${focTicket.length}`, leftX + 18, y);
+    } else {
+      pdf.text(`${indexTicket}/${tickets.length}`, leftX + 18, y);
+    }
+
+    y += 10;
+    pdf.setDrawColor(...GREEN_LABEL);
+    pdf.setLineWidth(0.5);
+    pdf.setLineDashPattern([2, 2], 0);
+    pdf.line(10, y, PAGE_W - 10, y);
+    pdf.setLineDashPattern([], 0);
+    y += 15;
 
     // ===== HƯỚNG DẪN / INSTRUCTIONS =====
-    pdf.setTextColor(...RED_LABEL);
+    pdf.setTextColor(...GREEN_LABEL);
     pdf.setFont("Roboto", "bold");
     pdf.setFontSize(9);
     pdf.text("HƯỚNG DẪN SỬ DỤNG/USER GUIDE:", 18, y);
@@ -264,7 +247,7 @@ export const downloadTicketPDFServer = async (
     y += 5;
 
     // ===== NOTE =====
-    pdf.setTextColor(...RED_LABEL);
+    pdf.setTextColor(...GREEN_LABEL);
     pdf.setFont("Roboto", "bold");
     pdf.setFontSize(9);
     pdf.text("LƯU Ý/NOTE:", 18, y);
@@ -288,7 +271,7 @@ export const downloadTicketPDFServer = async (
     pdf.setTextColor(0, 0, 0);
     pdf.setFont("Roboto", "normal");
     pdf.setFontSize(12);
-    pdf.text("Minh Tuấn Travel", PAGE_W / 2 - 28, PAGE_H - 22, { align: "center" });
+    pdf.text("Moon Prince", PAGE_W / 2 - 28, PAGE_H - 22, { align: "center" });
 
     pdf.setFont("Roboto", "normal");
     pdf.setFontSize(9);

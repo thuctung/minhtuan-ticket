@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { MENUS } from "@/commons/constant";
 import Image from "next/image";
 
-export function HeaderMobile({ pathname }: { pathname: string }) {
+export function HeaderMobile({ pathname, t }: { pathname: string; t: Function }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -19,15 +19,15 @@ export function HeaderMobile({ pathname }: { pathname: string }) {
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <div className="flex items-center">
             <Image
-              src="/logo1.png"
-              alt="Minh Tuan Travel"
+              src="/moonlogo.png"
+              alt="Moon Prince"
               width={48}
               height={48}
               className="object-contain mix-blend-multiply"
               sizes="(max-width: 768px) 100vw, 33vw"
               priority
             />
-            <span className="text-xl font-black text-red-500 leading-none">Minh Tuấn</span>
+            <span className="text-xl font-black text-red-500 leading-none">Moon Prince</span>
           </div>
         </div>
 
@@ -51,7 +51,9 @@ export function HeaderMobile({ pathname }: { pathname: string }) {
               >
                 <item.icon className={["w-[18px] h-[18px]", item.iconColor].join(" ")} />
               </span>
-              <span className="flex-1 text-sm text-gray-700 font-medium">{item.name}</span>
+              <span className="flex-1 text-sm text-gray-700 font-medium">
+                {t(`common.${item.name}`)}
+              </span>
               <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-400 transition-colors" />
             </a>
           ))}

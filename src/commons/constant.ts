@@ -1,46 +1,41 @@
 import { MenuMgtType } from "@/types";
-import {
-  Compass,
-  Sparkles,
-  Ticket,
-  Award,
-  HelpCircle,
-  Store,
-  ChevronRight,
-  X,
-  Plane,
-} from "lucide-react";
-
-export const ACC_STATUS = {
-  PENDING: "pending",
-  APPROVED: "approved",
-  SUSPENDED: "suspended",
-};
+import { Ticket, Award, HelpCircle, Store } from "lucide-react";
 
 export const TYPE_TRANSACTION = {
-  ADD: "add",
+  ADD: "ADD",
   PAID: "PAID",
-  TICKET_BUY: "ticket_buy",
+  BUY_TICKET: "BUY_TICKET",
+  REFUND: "REFUND",
 };
 
 export const ROLES = {
-  CUSTOMER: "customer",
-  AFFILIATE: "affiliate",
-  ADMIN: "admin",
+  CUSTOMER: "CUSTOMER",
+  AFFILIATE: "AFFILATE",
+  ADMIN: "ADMIN",
+  REGISTER: "REGISTER",
 };
 
-export const TOPUPS_STATUS = {
-  PENDING: "pending",
-  APPROVED: "completed",
-  REJECTED: "rejected",
-  ERROR: "error",
+export const STATUS_COMMON_TYPE = {
+  PENDING: "PENDING",
+  COMPLETED: "COMPLETED",
+  FAILED: "FAILED",
+  SUCCESS: "SUCCESS",
+  ERROR: "ERROR",
+  REJECTED: "REJECTED",
+  APPROVED: "APPROVED",
+  SUSPENDED: "SUSPENDED",
+  SENT: "SENT",
+  PAID: "PAID",
+  CANCELED: "CANCELED",
+  ACTIVE: "ACTIVE",
+  ONHOLD: "ONHOLD",
 };
 
 export const LIMIT_TABLE = 10;
 
 export const SIDEBAR_ADMIN: MenuMgtType[] = [
   {
-    link: "/admin/affiliates",
+    link: "/admin",
     lable: "Quản lý đại lý",
     icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
   },
@@ -49,28 +44,37 @@ export const SIDEBAR_ADMIN: MenuMgtType[] = [
     lable: "Quản lý nạp tiền",
     icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z",
   },
-
-  { link: "/admin/stats", lable: "Kiểm tra số dư", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
+  { link: "/admin/stats", lable: "Thống kê", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
+  {
+    link: "/admin/agents",
+    lable: "Quản lý cấp bậc",
+    icon: "M12 3a2 2 0 1 0 0 4a2 2 0 1 0 0 -4M12 7v3M6 10h12M6 10v3M18 10v3M6 16a2 2 0 1 0 0 4a2 2 0 1 0 0 -4M18 16a2 2 0 1 0 0 4a2 2 0 1 0 0 -4",
+  },
+  {
+    link: "/admin/sunworld-booking",
+    lable: "Tra cứu Sunworld",
+    icon: "M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z",
+  },
   {
     link: "/admin/history",
     lable: "Lịch sử rút vé",
     icon: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8M3 3v5h5M12 7v5l4 2",
   },
   {
-    link: "/admin/ticket-status",
-    lable: "Trạng thái vé",
-    icon: "M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z",
+    link: "/admin/site",
+    lable: "Quản lý công viên",
+    icon: "M12 2a1 1 0 011 1v2.05a5 5 0 013.95 3.95H19a1 1 0 110 2h-1v1a6 6 0 01-5 5.91V21a1 1 0 11-2 0v-3.09A6 6 0 016 11v-1H5a1 1 0 010-2h2.05A5 5 0 0111 5.05V3a1 1 0 011-1z",
   },
   {
-    link: "/admin/booking-status",
-    lable: "Tra cứu booking",
-    icon: "M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z",
+    link: "/admin/product-mgt",
+    lable: "Thông tin giá vé",
+    icon: "M4 5a2 2 0 00-2 2v2a2 2 0 012 2 2 2 0 010 4v2a2 2 0 002 2h12a2 2 0 002-2v-2a2 2 0 010-4 2 2 0 012-2V7a2 2 0 00-2-2H4zm5 3a1 1 0 112 0v8a1 1 0 11-2 0V8z",
   },
 ];
 
 export const SIDEBAR_AFF: MenuMgtType[] = [
   {
-    link: "/affiliate/get-ticket",
+    link: "/affiliate",
     lable: "Rút vé",
     icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 000 4h2a2 2 0 000-4H9z",
   },
@@ -80,9 +84,19 @@ export const SIDEBAR_AFF: MenuMgtType[] = [
     icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z",
   },
   {
-    link: "/affiliate/transaction",
-    lable: "Lịch sử giao dịch",
+    link: "/affiliate/stats",
+    lable: "Lịch sử rút vé",
     icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+  {
+    link: "/affiliate/transaction",
+    lable: "Biến động số dư",
+    icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+  },
+  {
+    link: "/affiliate/sunworld-booking",
+    lable: "Tra cứu Sunworld",
+    icon: "M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z",
   },
   {
     link: "/affiliate/profile",
@@ -92,12 +106,14 @@ export const SIDEBAR_AFF: MenuMgtType[] = [
 ];
 
 export const DB_TABLE_NAME = {
+  CATEGORY: "category",
   TOPUPS: "topups",
   PROFILES: "profiles",
   VIEW_PROFILE_TOPUP: "topups_with_profiles",
   VIEW_ADMIN_REPORT: "admin_order_report",
-  FUC_UPADTE_STAUS_BALANCE: "approve_topup",
-  FUC_CUSTOMER_BUY_TICKET: "customer_buy_ticket",
+  FUNC_UPADTE_STAUS_BALANCE: "approve_topup",
+  FUNC_CUSTOMER_BUY_TICKET: "customer_buy_ticket",
+  FUNC_CUSTOMER_CLAIM_TICKET: "claim_customer_order",
   TICKET_TYPES: "ticket_types",
   TICKET_TICKET_VARIANT: "ticket_variants",
   VIEW_TICET_VARIANTS_AND_CATEGORY: "ticket_variants_and_category",
@@ -108,15 +124,21 @@ export const DB_TABLE_NAME = {
   PROMOTION_PRICE: "promotion_price",
   PROMOTION_LOCATION: "promotion_location",
   ORDERS: "orders",
+  REFUND_HISTORY: "refund_history",
   ORDERS_ITEMS: "order_items",
   VIEW_TICKET_SALE: "view_sale_history",
+  VIEW_TICKET_SALE_SUMARY: "view_sale_summary",
+  RF_REFUND_AGENT_BALANCE: "refund_agent_balance",
+  RF_UPDATE_ORDER_ITEM_CANCEL: "cancel_order_tickets",
   FUNC_AFF_ADD_MONEY: "handle_topup_webhook",
   AGENTS: "agents",
   FUNC_CREATE_ORDER_PENDING: "create_order_pending",
   FUNC_COMPLETE_ORDER: "complete_order",
   FUNC_GET_AGENT_SALE_SUMARY: "get_agent_sale_summary",
+  FUNC_GET_REFUND_SUMARY: "get_refund_summary",
   FUNC_GET_ALL_SALE_SUMARY: "get_all_sale_summary",
   FUNC_COMPLETE_ORDER_CUSTOMER: "complete_order_customer",
+  FUNC_SYNC_PRODUCT_PRICE: "sync_products_prices",
   SYSTEM_SETTINGS: "system_settings",
   PRODUCTS: "products",
   PRODUCT_CATEGORY: "category",
@@ -124,6 +146,9 @@ export const DB_TABLE_NAME = {
   STORAGE_EMAIL_VOUCHERS: "email-vouchers",
   EMAIL_QUEUE: "email_queue",
   TICKETS: "tickets",
+  AGENT_PRICE_DEFAULT: "dafault_agent_price",
+  FUNC_ONEPAY_FINALIZE_PAYMENT: "onepay_finalize_payment",
+  ONEPAY_TRANSACTIONS: "onepay_transactions",
 };
 
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
@@ -134,9 +159,9 @@ export const BANK_INFO = {
   bankAccName: process.env.NEXT_PUBLIC_BANK_ACC_NAME,
 };
 
-export const PHONE_ADMIN = process.env.NEXT_PUBLIC_PHONE_ADMIN || "0905 202 586";
+export const PHONE_ADMIN = process.env.NEXT_PUBLIC_PHONE_ADMIN || "0938 367 886";
 
-export const PHONE_FILE_PDF = "0905 202 586";
+export const PHONE_FILE_PDF = "0938 367 886";
 
 export const SUN_GROUP = {
   swgSubscriptionKey: process.env.NEXT_PUBLIC_SUN_SWG_SUBSCRIPTION_KEY || "",
@@ -151,60 +176,47 @@ export const SUN_SCOPE_TOKEN =
 
 export const SUN_PROXY_GET_DATA = "https://proxy-dev.its-solution.vn/swg/svcotasap/stg";
 
-export const PAYMENT_STATUS = {
-  PENDING: "pending",
-  COMPLETED: "completed",
-  FAILED: "failed",
-  SUCCESS: "success",
-};
-
-export const AGENT_CODE = {
-  CUSTOMER: "customer",
-  LEVEL_1: "level_1",
-  LEVEL_2: "level_2",
-  STAFF: "staff",
-};
-
 export const TYPE_TRANSFER = {
   CUSTOMER: "CMT",
   AFF: "AFF",
   STAFF: "STF",
+  REFUND: "REFUND",
 };
 
 export const MENUS = [
   {
     link: "/",
-    name: "Trang chủ",
+    name: "header.hompage",
     icon: Award,
     iconBg: "bg-green-50",
     iconColor: "text-green-600",
   },
   {
-    link: "/dat-ve",
-    name: "Đặt vé",
+    link: "/buy-ticket",
+    name: "header.buyticket",
     icon: Ticket,
     iconBg: "bg-green-50",
     iconColor: "text-green-600",
   },
 
   {
-    link: "/#",
-    name: "Giới thiệu",
+    link: "/gioi-thieu",
+    name: "header.about",
     icon: Award,
     iconBg: "bg-yellow-50",
     iconColor: "text-yellow-600",
   },
 
   {
-    link: "/#",
-    name: "Hỏi đáp",
+    link: "/chinh-sach/thong-tin-chu-so-huu",
+    name: "header.owner",
     icon: HelpCircle,
     iconBg: "bg-gray-50",
     iconColor: "text-gray-600",
   },
   {
-    link: "/dang-ky-dai-ly",
-    name: "Đại lý",
+    link: "/dai-ly",
+    name: "header.agent",
     icon: Store,
     iconBg: "bg-purple-50",
     iconColor: "text-purple-600",
@@ -229,12 +241,9 @@ export const SITE_SUB_GROUP = {
 
 export const LOCAL_SUN_TOKEN = "sun_access_token";
 
-export const CUSTOMER = "customer";
-export const AGENT = "agent";
-
 export const PersonType = {
-  [CUSTOMER]: "Khách lẻ",
-  [AGENT]: "Đại lý",
+  [ROLES.CUSTOMER]: "Khách lẻ",
+  [ROLES.AFFILIATE]: "Đại lý",
 };
 
 export const END_DATE_GMT7 = "T23:59:59+07:00";
@@ -257,3 +266,19 @@ export const SITE_CODES = {
 
 export const BEST_SELLER = "BEST_SELLER";
 export const ALL = "ALL";
+
+export const COMPANY_INFO = {
+  brand: process.env.NEXT_PUBLIC_BRAND_NAME,
+  legalName: process.env.NEXT_PUBLIC_COMPANY_NAME,
+  taxCode: process.env.NEXT_PUBLIC_TAX_CODE,
+  address: process.env.NEXT_PUBLIC_ADDRESS,
+  hotline: process.env.NEXT_PUBLIC_HOTLINE,
+  email: process.env.NEXT_PUBLIC_EMAIL,
+  workingHours: process.env.NEXT_PUBLIC_WORKING_HOUR,
+  zaloUrl: process.env.NEXT_PUBLIC_ZALO_URL,
+  facebookUrl: process.env.NEXT_PUBLIC_FACEBOOK_URL,
+  updatedAt: "15/11/2026",
+  personHost: process.env.NEXT_PUBLIC_PERSON_HOST,
+  personRole: process.env.NEXT_PUBLIC_PERSON_ROLE,
+  domain: process.env.NEXT_PUBLIC_APP_URL,
+};

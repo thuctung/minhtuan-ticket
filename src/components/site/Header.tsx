@@ -3,29 +3,14 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
-import { useLang } from "@/lib/useLang";
+import { ShoppingCart, User } from "lucide-react";
 
-import {
-  Compass,
-  Sparkles,
-  Ticket,
-  Award,
-  HelpCircle,
-  Store,
-  ChevronRight,
-  X,
-  Plane,
-  User,
-} from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { t } from "@/lib/i18n/t";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { CommonType, ProfileType } from "@/types";
@@ -38,14 +23,23 @@ import Image from "next/image";
 import { sv_getCurrentProfile } from "@/app-controler/login/api";
 import { UserPopup } from "./PopupUser";
 import { HeaderMobile } from "./HeaderMobile";
+import { useCartStore } from "@/stores/useCartStore";
+import Languages from "./Languages";
+import { useTranslation } from "@/lib/i18n/client";
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   const profile: ProfileType = useProfileStore((state: any) => state.profile);
   const supabase = createSupabaseBrowserClient();
 
+  const cartCount = useCartStore((s) => {
+    let total = 0;
+    for (const item of s.items.values()) total += item.quantity;
+    return total;
+  });
   const { logout }: any = useProfileStore.getState();
   const { setGlobalLoading, setToastMessage }: CommonType | any = useCommonStore.getState();
 
@@ -90,27 +84,25 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-slate-100 bg-[#FFFAF0] backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-slate-100 bg-[#FFFF] backdrop-blur-md">
         <div className=" flex  items-center justify-between px-4 py-3 md:px-6">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative transition-transform group-hover:scale-105">
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative transition-transform group-hover:scale-103 flex flex-col justify-center items-center">
+                <Image alt="" src="/moonlogo.png" width={52} height={44} />
+                <span className="hidden text-[#fba405] sm:inline">Hoàng Nguyệt</span>
+              </div>
+            </Link>
+            <div className="ml-5">
               <Image
-                src="/logo1.png"
-                alt="Minh Tuan Travel"
-                width={48}
-                height={48}
-                className="object-contain mix-blend-multiply"
-                sizes="(max-width: 768px) 100vw, 33vw"
-                priority
+                className="animate-[rotateY_3s_linear_infinite]"
+                alt="Moonprice Trophy"
+                src="/moonprice_trophy.png"
+                width={42}
+                height={34}
               />
             </div>
-            <div className="leading-tight">
-              <div className="font-bold text-lg  text-red-500">Minh Tuấn</div>
-              <div className="hidden text-[10px] font-bold text-[#2b8624] uppercase tracking-widest sm:block">
-                Travel
-              </div>
-            </div>
-          </Link>
+          </div>
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-500 md:flex">
@@ -132,7 +124,7 @@ export default function Header() {
                   item.link === pathname ? "text-[#1c5b41]" : "text-[#1c5b41] hover:text-[#fe9614]"
                 }`}
               >
-                {item.name}
+                {t(`common.${item.name}`)}
                 {item.link === pathname && (
                   <span className="absolute -bottom-[13px] left-0 right-0 h-0.5 rounded-full bg-[#fe9614]" />
                 )}
@@ -143,11 +135,22 @@ export default function Header() {
           {/* Right side */}
           <div className="flex items-center gap-2">
             {/* Language */}
-            {/* <Languages /> */}
-
+            <Languages />
+            <Link
+              href="/cart"
+              aria-label="Giỏ hàng"
+              className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-[#1c5b41] transition-colors hover:bg-slate-100 hover:text-[#fe9614]"
+            >
+              <ShoppingCart className="h-5 w-5" color="#fba307" />
+              {cartCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#fe9614] px-1 text-[10px] font-bold leading-none text-white">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </Link>
             {!profile.user_id ? (
               <Link href="/login">
-                <User />
+                <User color="#fba307" />
               </Link>
             ) : (
               <DropdownMenu>
@@ -158,9 +161,11 @@ export default function Header() {
                     aria-label="User menu"
                   >
                     <Avatar className="h-8 w-8">
-                      <AvatarFallback>{initials}</AvatarFallback>
+                      <AvatarFallback color="">{initials}</AvatarFallback>
                     </Avatar>
-                    <span className="hidden text-sm font-medium md:inline">{displayName}</span>
+                    <span className="hidden text-sm font-medium md:inline text-[##fba307]">
+                      {displayName}
+                    </span>
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
@@ -170,7 +175,7 @@ export default function Header() {
             )}
 
             {/* Mobile menu */}
-            <HeaderMobile pathname={pathname} />
+            <HeaderMobile pathname={pathname} t={t} />
           </div>
         </div>
       </header>

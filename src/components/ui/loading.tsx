@@ -8,7 +8,6 @@ import Image from "next/image";
 
 export function LoadingGlobal() {
   const { loadingGlobal }: CommonType = useCommonStore((state: any) => state);
-
   return (
     <Dialog open={loadingGlobal}>
       <DialogContent
@@ -39,7 +38,7 @@ export function LoadingGlobal() {
         <Image
           width={40}
           height={40}
-          src="/logo1.png"
+          src="/moonlogo.png"
           alt="Logo"
           className="h-10 w-10  animate-bounce-vertical"
         />

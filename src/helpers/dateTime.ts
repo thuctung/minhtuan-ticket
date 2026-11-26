@@ -16,8 +16,8 @@ export const VN_TIMEZONE = "Asia/Ho_Chi_Minh";
 export const FULL_DATE_FORMAT = "DD-MM-YYYY HH:mm:ss";
 
 export const FULL_DATE_TIME_FORMAT = "YYYY-MM-DD hh:mm";
-
 export const BASIC_DATE_FORMAT = "DD-MM-YYYY";
+export const BASIC_TICKET_DATE_FORMAT = "DD/MM/YYYY";
 
 export const SERVER_DATE_FORMAT = "YYYY-MM-DD";
 
@@ -42,4 +42,9 @@ export const checkDateRange = (start: string, end: string, showMesage = true) =>
     return false;
   }
   return true;
+};
+
+export const covertDateFormToServer = (date: string) => {
+  const dateFrom = dayjsEx(date, BASIC_DATE_FORMAT);
+  return dayjs(dateFrom).format(SERVER_DATE_FORMAT);
 };

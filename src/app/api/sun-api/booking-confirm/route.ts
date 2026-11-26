@@ -5,20 +5,22 @@ import { rebuildDataTicket } from "@/helpers/ticket";
 import { PayloadGetTicketSunType } from "@/app-controler/checkout-client/type";
 import { getTicketFOCAndCutomer } from "@/app-controler/checkout-client/contants";
 import { supabaseAdmin } from "@/lib/supabase/server";
-import { DB_TABLE_NAME } from "@/commons/constant";
-import { KEY_MODIFY_DATA } from "@/app-controler/affi/stats/contants";
+import { DB_TABLE_NAME, STATUS_COMMON_TYPE } from "@/commons/constant";
 import { get } from "lodash";
 import { updateOrderError } from "@/helpers/update-status-order";
 
 export async function POST(req: Request) {
-  const { productSelected, orderCode, dateUse, orderId, customerEmail }: PayloadGetTicketSunType =
-    await req.json();
+  const body: PayloadGetTicketSunType = await req.json();
+  const { productSelected, orderCode, dateUse, orderId, customerEmail } = body;
   try {
     const { data: dataSunworld }: any = await sunWorldApi.post(`/ota/booking/confirm`, {
       orderCode,
     });
     const { result, messages, success } = dataSunworld;
 
+    debugger;
+    console.log("dataSunworld", dataSunworld);
+    console.log("body", body);
     if (success) {
       const { data: dataSaveOrder, error } = await supabaseAdmin.rpc(
         DB_TABLE_NAME.FUNC_COMPLETE_ORDER_CUSTOMER,
@@ -29,6 +31,8 @@ export async function POST(req: Request) {
           p_reference_code: result.referenceCode,
         }
       );
+      console.log("dataSaveOrder", dataSaveOrder);
+      console.log("error", error);
 
       if (dataSaveOrder) {
         const ticketBuild: TicketResultQRType[] | any = rebuildDataTicket(
@@ -38,7 +42,8 @@ export async function POST(req: Request) {
           productSelected
         );
         const siteName = get(ticketBuild, [0, "siteName"]) || "";
-        const { customerTickets } = getTicketFOCAndCutomer(ticketBuild);
+        const { customerTickets, focTickets } = getTicketFOCAndCutomer(ticketBuild);
+        console.log("ticketBuild", ticketBuild);
 
         await Promise.allSettled([
           supabaseAdmin.from(DB_TABLE_NAME.TICKETS).insert(ticketBuild).select(),
@@ -47,11 +52,14 @@ export async function POST(req: Request) {
             order_id: orderId,
             site_name: siteName,
             order_code: result.orderCode,
-            status: KEY_MODIFY_DATA.PENDING,
+            status: STATUS_COMMON_TYPE.PENDING,
             is_send_foc: false,
           }),
         ]);
-        return NextResponse.json({ data: customerTickets, messages: "" }, { status: 200 });
+        return NextResponse.json(
+          { data: { customerTickets, focTickets, dataSunworld }, messages: "" },
+          { status: 200 }
+        );
       } else {
         // LỖI TỪ DATABASE LƯU ORDER
         const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);

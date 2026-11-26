@@ -3,8 +3,7 @@ import { SendTicketInSystemMailType } from "@/app-controler/affi/getTicket/type"
 import { generateBookingVoucher } from "@/helpers/e-voucher";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
-import { DB_TABLE_NAME, ERROR_MESSAGE, PHONE_ADMIN } from "@/commons/constant";
-import { KEY_MODIFY_DATA } from "@/app-controler/affi/stats/contants";
+import { DB_TABLE_NAME, ERROR_MESSAGE, PHONE_ADMIN, STATUS_COMMON_TYPE } from "@/commons/constant";
 import resendMail from "@/axios/resendMail";
 
 const adminMail = env.SEND_MAIL_ADMIN;
@@ -27,7 +26,7 @@ export async function POST(req: Request) {
       toMail.push(email);
     }
     await resendMail.emails.send({
-      from: "Minh Tuấn Travel System<noreply@htmtravel.com>",
+      from: "Moon Prince System<noreply@dulichhoangnguyet.com>",
       to: toMail,
       subject: `Đặt vé Núi Thần Tài ${orderCode}, Ngày ${dateUse}`,
       html: `
@@ -93,7 +92,7 @@ export async function POST(req: Request) {
             <p style="margin-top: 24px;">
                   Vé điện tử được đính kèm trong email này. Vui lòng xuất trình mã khi sử dụng dịch vụ. </p> <p> Nếu cần hỗ trợ, vui lòng liên hệ bộ phận chăm sóc khách hàng: ${PHONE_ADMIN}.
             </p>
-            <p> Trân trọng,<br /> Minh Tuấn </p>
+            <p> Trân trọng,<br /> Moon Prince </p>
        </div>
     `,
       attachments: [
@@ -127,7 +126,7 @@ export async function POST(req: Request) {
       await supabaseAdmin
         .from(DB_TABLE_NAME.ORDERS)
         .update({
-          status: KEY_MODIFY_DATA.ERROR,
+          status: STATUS_COMMON_TYPE.ERROR,
           description: ERROR_MESSAGE.ERROR_SYSTEM_CREATE_TICKET,
         })
         .eq("id", payloadUpdateBalance.order_id);
