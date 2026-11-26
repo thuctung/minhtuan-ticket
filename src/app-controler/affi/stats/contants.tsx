@@ -19,12 +19,12 @@ export const TYPE_LIST: StatusType[] = [
 ];
 
 export const KEY_MODIFY_DATA = {
-  ["SUCCESS"]: "success",
-  ["PENDING"]: "pending",
-  ["ERROR"]: "error",
-  ["CANCEL"]: "cancel",
-  ["ONHOLD"]: "onhold",
-  ["FAILED"]: "failed",
+  ["SUCCESS"]: "SUCCESS",
+  ["PENDING"]: "PENDING",
+  ["ERROR"]: "ERROR",
+  ["CANCEL"]: "CANCEL",
+  ["ONHOLD"]: "ONHOLD",
+  ["FAILED"]: "FAILED",
 };
 
 export const StatusData = {

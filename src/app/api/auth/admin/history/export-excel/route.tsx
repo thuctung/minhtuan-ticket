@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   if (to) {
     query = query.lte("created_at", `${to}${END_DATE_GMT7}`);
   }
-  query = query.eq("status", "success");
+  query = query.eq("status", "SUCCESS");
 
   const { data, error } = await query;
 

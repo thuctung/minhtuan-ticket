@@ -11,7 +11,7 @@ export const intForm: AdminSearchReport = {
   to: df_To,
   email: "",
   location: "all",
-  status: "success",
+  status: "SUCCESS",
   full_name: "",
 };
 

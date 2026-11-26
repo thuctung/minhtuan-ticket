@@ -183,7 +183,7 @@ export default function GetTicketPageControler() {
   return (
     <div className="space-y-4">
       <CardContent className="space-y-6">
-        {profile.role !== "admin" && (
+        {profile.role !== "ADMIN" && (
           <>
             <div className="flex items-center justify-end">
               <div className="text-sm text-muted-foreground mr-2">Số dư: </div>

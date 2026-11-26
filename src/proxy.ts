@@ -25,11 +25,11 @@ export async function proxy(req: any) {
   }
   const role = profile?.role;
 
-  if (role === "admin" && pathname.startsWith("/affiliate")) {
+  if (role === "ADMIN" && pathname.startsWith("/affiliate")) {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
 
-  if (role === "affiliate" && pathname.startsWith("/admin")) {
+  if (role === "AFFILATE" && pathname.startsWith("/admin")) {
     return NextResponse.redirect(new URL("/affiliate", req.url));
   }
 
