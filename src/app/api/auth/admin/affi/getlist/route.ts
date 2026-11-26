@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     `,
       { count: "exact" }
     )
-    .neq("role", "admin")
+    .neq("role", "ADMIN")
     .order("updated_at", { ascending: false })
     .range(offset, offset + LIMIT_TABLE - 1);
 

@@ -67,8 +67,8 @@ export async function POST(req: Request) {
       full_name: fullName,
       phone,
       address,
-      role: "affiliate",
-      status: "pending",
+      role: "AFFILATE",
+      status: "PENDING",
     });
     if (profileErr) {
       return NextResponse.json(

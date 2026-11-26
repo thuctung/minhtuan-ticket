@@ -12,28 +12,28 @@ import {
 } from "lucide-react";
 
 export const ACC_STATUS = {
-  PENDING: "pending",
-  APPROVED: "approved",
-  SUSPENDED: "suspended",
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  SUSPENDED: "SUSPENDED",
 };
 
 export const TYPE_TRANSACTION = {
-  ADD: "add",
+  ADD: "ADD",
   PAID: "PAID",
-  TICKET_BUY: "ticket_buy",
+  TICKET_BUY: "BUY_TICKET",
 };
 
 export const ROLES = {
-  CUSTOMER: "customer",
-  AFFILIATE: "affiliate",
-  ADMIN: "admin",
+  CUSTOMER: "CUSTOMER",
+  AFFILIATE: "AFFILIATE",
+  ADMIN: "ADMIN",
 };
 
 export const TOPUPS_STATUS = {
-  PENDING: "pending",
-  APPROVED: "completed",
-  REJECTED: "rejected",
-  ERROR: "error",
+  PENDING: "PENDING",
+  APPROVED: "COMPLETED",
+  REJECTED: "REJECTED",
+  ERROR: "ERROR",
 };
 
 export const LIMIT_TABLE = 10;
@@ -152,10 +152,10 @@ export const SUN_SCOPE_TOKEN =
 export const SUN_PROXY_GET_DATA = "https://proxy-dev.its-solution.vn/swg/svcotasap/stg";
 
 export const PAYMENT_STATUS = {
-  PENDING: "pending",
-  COMPLETED: "completed",
-  FAILED: "failed",
-  SUCCESS: "success",
+  PENDING: "PENDING",
+  COMPLETED: "COMPLETED",
+  FAILED: "FAILED",
+  SUCCESS: "SUCCESS",
 };
 
 export const AGENT_CODE = {
@@ -228,8 +228,8 @@ export const SITE_SUB_GROUP = {
 
 export const LOCAL_SUN_TOKEN = "sun_access_token";
 
-export const CUSTOMER = "customer";
-export const AGENT = "agent";
+export const CUSTOMER = "CUSTOMER";
+export const AGENT = "AFFILATE";
 
 export const PersonType = {
   [CUSTOMER]: "Khách lẻ",

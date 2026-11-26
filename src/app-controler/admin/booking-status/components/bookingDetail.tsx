@@ -107,7 +107,7 @@ export default function BookingDetailCard({ booking }: { booking: TicketReponseT
     <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       {/* Header */}
       <div className="flex items-start justify-between gap-3 px-5 pt-5">
-        {orderStatus === "success" ? (
+        {orderStatus === "SUCCESS" ? (
           <button
             onClick={handleDownloadFile}
             className="rounded-lg border border-gray-200 px-4 py-2 bg-green-200 text-sm font-medium text-green-600 transition hover:bg-green-300"

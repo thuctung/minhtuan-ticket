@@ -12,7 +12,7 @@ export async function GET(request: Request) {
       email
     `
     )
-    .eq("role", "affiliate");
+    .eq("role", "AFFILATE");
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
